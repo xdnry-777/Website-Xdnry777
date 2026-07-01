@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilih Game - Xdnry777</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = { theme: { extend: { colors: { ungu: { utama:'#6B21A8', terang:'#A855F7', neon:'#D946EF' } } } } }
+    </script>
+    <style>.bg-gradasi { background: linear-gradient(135deg, #050505 0%, #1A102E 40%, #4C1D95 100%); } .bg-card { background: linear-gradient(145deg, rgba(107,33,168,0.2), rgba(45,12,94,0.3)); } .pilihan-item:hover { border-color: #A855F7; background: rgba(168,85,247,0.1); } .logo-game { width: 56px; height: 56px; object-fit: contain; border-radius: 12px; }</style>
+</head>
+<body class="bg-gradasi min-h-screen font-sans text-white">
+    <!-- Menu Samping -->
+    <div id="menuSamping" class="-translate-x-full fixed top-0 left-0 h-full w-72 bg-gray-900/98 backdrop-blur-md z-[60] transition-transform duration-300 border-r border-ungu-utama/30">
+        <div class="p-4 h-full flex flex-col">
+            <div class="flex justify-between items-center mb-6 pb-4 border-b border-ungu-utama/30">
+                <span class="text-xl font-bold text-ungu-terang">⚡ Xdnry777</span>
+                <button onclick="tutupMenu()" class="text-xl"><i class="fa fa-times"></i></button>
+            </div>
+            <div class="menu-user mb-4"></div>
+            <nav class="flex-1 space-y-2">
+                <a href="index.html" class="flex items-center gap-3 p-3 rounded-lg hover:bg-ungu-utama/30"><i class="fa fa-home w-5"></i> Beranda</a>
+                <a href="pilih-game.html" class="flex items-center gap-3 p-3 rounded-lg bg-ungu-utama/30"><i class="fa fa-gamepad w-5"></i> Top Up Game</a>
+                <a href="riwayat.html" class="flex items-center gap-3 p-3 rounded-lg hover:bg-ungu-utama/30"><i class="fa fa-history w-5"></i> Riwayat Pesanan</a>
+                <a href="bantuan.html" class="flex items-center gap-3 p-3 rounded-lg hover:bg-ungu-utama/30"><i class="fa fa-question-circle w-5"></i> Bantuan</a>
+                <a href="syarat.html" class="flex items-center gap-3 p-3 rounded-lg hover:bg-ungu-utama/30"><i class="fa fa-file-text w-5"></i> Syarat & Ketentuan</a>
+            </nav>
+            <div class="mt-auto pt-4 border-t border-ungu-utama/30 text-center text-sm text-gray-400">© 2026 Xdnry777</div>
+        </div>
+    </div>
+    <div onclick="tutupMenu()" class="hidden fixed inset-0 bg-black/50 z-50" id="lapisanTutup"></div>
+
+    <nav class="backdrop-blur-md bg-black/30 sticky top-0 z-40 border-b border-ungu-utama/30">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <button onclick="bukaMenu()" class="text-2xl"><i class="fa fa-bars"></i></button>
+            <div class="area-user"></div>
+        </div>
+    </nav>
+
+    <section class="container mx-auto px-4 py-10">
+        <a href="index.html" class="inline-flex items-center text-ungu-terang mb-6"><i class="fa fa-arrow-left mr-2"></i>Kembali</a>
+        <h1 class="text-2xl font-bold mb-8 text-center">Pilih Game Kamu</h1>
+
+        <!-- Daftar Game -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
+            <!-- Mobile Legends -->
+            <div class="bg-card rounded-xl p-5 border border-ungu-utama/40 cursor-pointer" onclick="bukaOpsi('Mobile Legends','Diamonds')">
+                <div class="flex items-center gap-3 mb-2">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Mobile_Legends_Bang_Bang_logo.svg/120px-Mobile_Legends_Bang_Bang_logo.svg.png" class="logo-game bg-white p-1">
+                    <div><h3 class="font-bold">Mobile Legends</h3><p class="text-sm text-gray-400">Diamonds</p></div>
+                </div>
+            </div>
+            <!-- Free Fire -->
+            <div class="bg-card rounded-xl p-5 border border-ungu-utama/40 cursor-pointer" onclick="bukaOpsi('Free Fire','Diamonds')">
+                <div class="flex items-center gap-3 mb-2">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Free_Fire_logo.svg/120px-Free_Fire_logo.svg.png" class="logo-game bg-orange-500 p-1">
+                    <div><h3 class="font-bold">Free Fire</h3><p class="text-sm text-gray-400">Diamonds</p></div>
+                </div>
+            </div>
+            <!-- PUBG Mobile -->
+            <div class="bg-card rounded-xl p-5 border border-ungu-utama/40 cursor-pointer" onclick="bukaOpsi('PUBG Mobile','UC')">
+                <div class="flex items-center gap-3 mb-2">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/PUBG_Mobile_logo.svg/120px-PUBG_Mobile_logo.svg.png" class="logo-game bg-yellow-400 p-1">
+                    <div><h3 class="font-bold">PUBG Mobile</h3><p class="text-sm text-gray-400">Unknown Cash</p></div>
+                </div>
+            </div>
+            <!-- Genshin Impact -->
+            <div class="bg-card rounded-xl p-5 border border-ungu-utama/40 cursor-pointer" onclick="bukaOpsi('Genshin Impact','Genesis Crystal')">
+                <div class="flex items-center gap-3 mb-2">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Genshin_Impact_logo.svg/120px-Genshin_Impact_logo.svg.png" class="logo-game bg-cyan-500 p-1">
+                    <div><h3 class="font-bold">Genshin Impact</h3><p class="text-sm text-gray-400">Genesis Crystal</p></div>
+                </div>
+            </div>
+            <!-- Higgs Domino -->
+            <div class="bg-card rounded-xl p-5 border border-ungu-utama/40 cursor-pointer" onclick="bukaOpsi('Higgs Domino','Koin Emas')">
+                <div class="flex items-center gap-3 mb-2">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Higgs_Domino_Logo.png/120px-Higgs_Domino_Logo.png" class="logo-game bg-yellow-500 p-1">
+                    <div><h3 class="font-bold">Higgs Domino</h3><p class="text-sm text-gray-400">Koin Emas</p></div>
+                </div>
+            </div>
+            <!-- Roblox -->
+            <div class="bg-card rounded-xl p-5 border border-ungu-utama/40 cursor-pointer" onclick="bukaOpsi('Roblox','Robux')">
+                <div class="flex items-center gap-3 mb-2">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Roblox_logo.svg/120px-Roblox_logo.svg.png" class="logo-game bg-white p-1">
+                    <div><h3 class="font-bold">Roblox</h3><p class="text-sm text-gray-400">Robux</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pilihan Item & Harga -->
+        <div id="areaOpsi" class="hidden max-w-lg mx-auto bg-card rounded-2xl p-6 border border-ungu-utama/40 mb-6">
+            <div class="flex justify-between items-center mb-4"><h2 class="text-xl font-semibold" id="namaGameJudul">-</h2><button onclick="tutupOpsi()" class="text-gray-400 text-xl">&times;</button></div>
+            <p class="text-sm text-gray-400 mb-4">Pilih jumlah yang diinginkan:</p>
+
+            <div id="daftarOpsi" class="space-y-3 mb-6"></div>
+
+            <div id="formData" class="hidden space-y-4 border-t border-ungu-utama/30 pt-5">
+                <div class="bg-black/30 p-3 rounded-lg">
+                    <p class="text-sm text-gray-400">Pilihan Kamu:</p>
+                    <p class="font-bold text-ungu-terang" id="pilihanItem">-</p>
+                    <p class="text-lg font-bold" id="pilihanHarga">-</p>
+                </div>
+                <div>
+                    <label class="text-sm text-gray-400 mb-1 block">ID Pengguna</label>
+                    <input type="text" id="idAkun" class="w-full bg-black/40 border border-ungu-utama/50 rounded-lg px-3 py-3" placeholder="Masukkan ID Akun">
+                </div>
+                <div>
+                    <label class="text-sm text-gray-400 mb-1 block">Nickname Game</label>
+                    <input type="text" id="namaPemain" class="w-full bg-black/40 border border-ungu-utama/50 rounded-lg px-3 py-3" placeholder="Nama dalam game">
+                </div>
+                <button onclick="lanjutBayar()" class="w-full bg-gradient-to-r from-ungu-utama to-ungu-neon py-3 rounded-lg font-bold">Lanjut ke Pembayaran <i class="fa fa-arrow-right ml-1"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <script src="auth.js"></script>
+    <script>
+        let dataGame = {};
+
+        // ✅ Harga Disesuaikan: Murah & Kamu Tetap Untung
+        const daftarHarga = {
+            'Mobile Legends': [
+                {jml:'70 Diamonds', hrg:'18.000'},
+                {jml:'140 Diamonds', hrg:'34.500'},
+                {jml:'350 Diamonds', hrg:'83.000'},
+                {jml:'720 Diamonds', hrg:'165.000'},
+                {jml:'1450 Diamonds', hrg:'325.000'}
+            ],
+            'Free Fire': [
+                {jml:'70 Diamonds', hrg:'17.000'},
+                {jml:'140 Diamonds', hrg:'32.000'},
+                {jml:'355 Diamonds', hrg:'78.000'},
+                {jml:'720 Diamonds', hrg:'156.000'},
+                {jml:'1460 Diamonds', hrg:'308.000'}
+            ],
+            'PUBG Mobile': [
+                {jml:'60 UC', hrg:'18.000'},
+                {jml:'180 UC', hrg:'51.000'},
+                {jml:'385 UC', hrg:'102.000'},
+                {jml:'840 UC', hrg:'215.000'},
+                {jml:'1750 UC', hrg:'430.000'}
+            ],
+            'Genshin Impact': [
+                {jml:'60 Kristal', hrg:'19.500'},
+                {jml:'330 Kristal', hrg:'95.000'},
+                {jml:'1090 Kristal', hrg:'305.000'},
+                {jml:'2240 Kristal', hrg:'610.000'},
+                {jml:'3880 Kristal', hrg:'1.030.000'}
+            ],
+            'Higgs Domino': [
+                {jml:'100M Koin', hrg:'11.000'},
+                {jml:'300M Koin', hrg:'30.000'},
+                {jml:'1B Koin', hrg:'88.000'},
+                {jml:'3B Koin', hrg:'250.000'},
+                {jml:'10B Koin', hrg:'780.000'}
+            ],
+            'Roblox': [
+                {jml:'400 Robux', hrg:'72.000'},
+                {jml:'800 Robux', hrg:'138.000'},
+                {jml:'1700 Robux', hrg:'280.000'},
+                {jml:'4500 Robux', hrg:'680.000'},
+                {jml:'10000 Robux', hrg:'1.480.000'}
+            ]
+        };
+
+        function bukaOpsi(nama, satuan) {
+            dataGame.nama = nama;
+            dataGame.satuan = satuan;
+            document.getElementById('namaGameJudul').textContent = nama;
+
+            const opsi = daftarHarga[nama];
+            const wadah = document.getElementById('daftarOpsi');
+            wadah.innerHTML = '';
+            document.getElementById('formData').classList.add('hidden');
+
+            opsi.forEach(item => {
+                const baris = document.createElement('div');
+                baris.className = 'pilihan-item p-4 border border-gray-700 rounded-lg cursor-pointer flex justify-between items-center';
+                baris.innerHTML = `<span>${item.jml}</span><span class="font-bold text-ungu-terang">Rp ${item.hrg}</span>`;
+                baris.onclick = () => pilihItem(nama, item.jml, item.hrg);
+                wadah.appendChild(baris);
+            });
+
+            document.getElementById('areaOpsi').classList.remove('hidden');
+        }
+
+        function pilihItem(nama, item, harga) {
+            dataGame.item = item;
+            dataGame.harga = harga;
+            document.getElementById('pilihanItem').textContent = item + ' - ' + nama;
+            document.getElementById('pilihanHarga').textContent = 'Rp ' + harga;
+            document.getElementById('formData').classList.remove('hidden');
+        }
+
+        function tutupOpsi() {
+            document.getElementById('areaOpsi').classList.add('hidden');
+            document.getElementById('formData').classList.add('hidden');
+        }
+
+        function lanjutBayar() {
+            const id = document.getElementById('idAkun').value.trim();
+            const nick = document.getElementById('namaPemain').value.trim();
+            if (!id || !nick) return alert('⚠️ Masukkan ID dan Nickname dulu!');
+
+            localStorage.setItem('namaGame', dataGame.nama);
+            localStorage.setItem('item', dataGame.item);
+            localStorage.setItem('hargaDasar', dataGame.harga.replace(/\./g,''));
+            localStorage.setItem('id', id);
+            localStorage.setItem('nickname', nick);
+
+            window.location.href = 'pembayaran.html';
+        }
+    </script>
+</body>
+</html>

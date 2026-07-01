@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Akun - Xdnry777</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = { theme: { extend: { colors: { ungu: { utama:'#6B21A8' } } } } }
+    </script>
+    <style>.bg-gradasi { background: linear-gradient(135deg, #050505 0%, #1A102E 40%, #4C1D95 100%); }</style>
+</head>
+<body class="bg-gradasi min-h-screen flex items-center justify-center p-4 font-sans">
+    <div class="w-full max-w-md bg-white/95 rounded-xl p-6 shadow-2xl">
+        <div class="text-center mb-6">
+            <div class="text-3xl font-bold text-ungu-utama">⚡ Xdnry777</div>
+            <p class="text-gray-500 mt-2">Buat Akun Baru</p>
+        </div>
+
+        <form class="space-y-4">
+            <div>
+                <label class="text-sm text-gray-600 mb-1 block">Nama Lengkap</label>
+                <input type="text" id="namaDaftar" class="w-full border border-gray-300 rounded-lg px-3 py-3" placeholder="Nama kamu" required>
+            </div>
+            <div>
+                <label class="text-sm text-gray-600 mb-1 block">Username</label>
+                <input type="text" id="userDaftar" class="w-full border border-gray-300 rounded-lg px-3 py-3" placeholder="Buat username unik" required>
+            </div>
+            <div>
+                <label class="text-sm text-gray-600 mb-1 block">Email</label>
+                <input type="email" id="emailDaftar" class="w-full border border-gray-300 rounded-lg px-3 py-3" placeholder="email@contoh.com" required>
+            </div>
+            <div>
+                <label class="text-sm text-gray-600 mb-1 block">Kata Sandi</label>
+                <input type="password" id="passDaftar" class="w-full border border-gray-300 rounded-lg px-3 py-3" placeholder="Minimal 6 karakter" required>
+            </div>
+            <button type="button" onclick="simpanAkun()" class="w-full bg-ungu-utama text-white py-3 rounded-lg font-bold">Daftar Akun</button>
+        </form>
+
+        <div class="text-center mt-5">
+            <p class="text-gray-600">Sudah punya akun? <a href="login.html" class="text-ungu-utama font-bold">Masuk Disini</a></p>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="index.html" class="text-ungu-utama"><i class="fa fa-arrow-left mr-1"></i>Kembali</a>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        function simpanAkun() {
+            const nama = document.getElementById('namaDaftar').value.trim();
+            const username = document.getElementById('userDaftar').value.trim();
+            const email = document.getElementById('emailDaftar').value.trim();
+            const password = document.getElementById('passDaftar').value;
+
+            if (!nama || !username || !email || !password) return alert('⚠️ Lengkapi semua isian!');
+            if (password.length < 6) return alert('⚠️ Kata sandi minimal 6 karakter!');
+
+            let daftarAkun = JSON.parse(localStorage.getItem('daftarAkun') || '[]');
+            const cekSudah = daftarAkun.find(a => a.username === username || a.email === email);
+            if (cekSudah) return alert('❌ Username atau Email sudah terdaftar!');
+
+            daftarAkun.push({ nama, username, email, password });
+            localStorage.setItem('daftarAkun', JSON.stringify(daftarAkun));
+
+            alert('✅ Akun Berhasil Dibuat! Silakan Login.');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
