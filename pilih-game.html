@@ -21,7 +21,7 @@
         body { background: linear-gradient(135deg, #050505 0%, #1A102E 40%, #4C1D95 100%); min-height: 100vh; }
         .game-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(168, 85, 247, 0.35); }
         .game-card { transition: all 0.3s ease; }
-        .sidebar { transform: translateX(-100%); transition: transform 0.3s ease; }
+        .sidebar { transform: translateX(-100%); transition: 0.3s ease; }
         .sidebar.buka { transform: translateX(0); }
     </style>
 </head>
@@ -52,21 +52,16 @@
     </div>
     <div id="latarGelap" onclick="tutupMenu()" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
 
-    <!-- HEADER DENGAN TOMBOL MENU -->
+    <!-- HEADER -->
     <header class="bg-black/40 backdrop-blur-md py-4 px-4 sticky top-0 z-30 shadow-lg">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <!-- TOMBOL GARIS TIGA -->
+        <div class="max-w-3xl mx-auto flex justify-between items-center">
             <button onclick="bukaMenu()" class="text-2xl text-white">
                 <i class="fa fa-bars"></i>
             </button>
-
             <div class="text-2xl font-bold text-ungu-terang">⚡ Xdnry777</div>
-
             <div class="flex items-center gap-3">
                 <span class="text-sm">Halo, <span class="font-bold" id="namaPengguna"></span></span>
-                <button onclick="keluarAkun()" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-full text-sm font-medium">
-                    Keluar
-                </button>
+                <button onclick="keluarAkun()" class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded-full text-sm">Keluar</button>
             </div>
         </div>
     </header>
@@ -74,219 +69,262 @@
     <main class="max-w-3xl mx-auto px-4 py-8">
         <div class="text-center mb-8">
             <h1 class="text-3xl font-bold mb-2">Pilih Game Top Up</h1>
-            <p class="text-gray-400">Pilih game dan jumlah yang kamu butuhkan</p>
+            <p class="text-gray-400">Pilih jumlah yang kamu butuhkan</p>
         </div>
 
         <div class="space-y-8">
-            
-            <!-- Daftar Game -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
-            <!-- 1. Mobile Legends -->
-            <div class="game-card bg-white/10 rounded-xl p-5 border border-white/10 hover:border-ungu-terang">
-                <div class="flex items-center gap-4 mb-4">
-                    <img src="https://files.catbox.moe/q692nn.jpg" class="w-16 h-16 rounded-lg object-cover">
+
+            <!-- 1. MOBILE LEGENDS -->
+            <div class="game-card bg-white/10 rounded-2xl p-6 border border-white/10">
+                <div class="flex items-center gap-4 mb-5">
+                    <img src="https://files.catbox.moe/q692nn.jpg" class="w-20 h-20 rounded-xl object-cover">
                     <div>
-                        <h3 class="font-bold text-xl">Mobile Legends</h3>
-                        <p class="text-gray-400 text-sm">Diamond</p>
+                        <h3 class="text-2xl font-bold">Mobile Legends</h3>
+                        <p class="text-gray-400">Diamond</p>
                     </div>
                 </div>
-                <div class="space-y-2 text-sm">
-                    <div class="flex justify-between py-1 border-b border-white/5">
+                <div class="space-y-3 mb-5">
+                    <div class="flex justify-between items-center py-2 border-b border-white/5">
                         <span>56 Diamond</span>
-                        <span class="font-bold text-green-400">Rp 16.000</span>
+                        <span class="text-green-400 font-bold">Rp 16.000</span>
                     </div>
-                    <div class="flex justify-between py-1 border-b border-white/5">
+                    <button onclick="lanjutBayar('Mobile Legends', '56 Diamond', 16000)" class="w-full bg-ungu-utama/80 hover:bg-ungu-utama py-2 rounded-lg mb-2">Beli</button>
+
+                    <div class="flex justify-between items-center py-2 border-b border-white/5">
                         <span>112 Diamond</span>
-                        <span class="font-bold text-green-400">Rp 31.000</span>
+                        <span class="text-green-400 font-bold">Rp 31.000</span>
                     </div>
-                    <div class="flex justify-between py-1 border-b border-white/5">
+                    <button onclick="lanjutBayar('Mobile Legends', '112 Diamond', 31000)" class="w-full bg-ungu-utama/80 hover:bg-ungu-utama py-2 rounded-lg mb-2">Beli</button>
+
+                    <div class="flex justify-between items-center py-2 border-b border-white/5">
                         <span>256 Diamond</span>
-                        <span class="font-bold text-green-400">Rp 68.000</span>
+                        <span class="text-green-400 font-bold">Rp 68.000</span>
                     </div>
-                    <div class="flex justify-between py-1 border-b border-white/5">
+                    <button onclick="lanjutBayar('Mobile Legends', '256 Diamond', 68000)" class="w-full bg-ungu-utama/80 hover:bg-ungu-utama py-2 rounded-lg mb-2">Beli</button>
+
+                    <div class="flex justify-between items-center py-2 border-b border-white/5">
                         <span>512 Diamond</span>
-                        <span class="font-bold text-green-400">Rp 135.000</span>
+                        <span class="text-green-400 font-bold">Rp 135.000</span>
                     </div>
-                    <div class="flex justify-between py-1">
+                    <button onclick="lanjutBayar('Mobile Legends', '512 Diamond', 135000)" class="w-full bg-ungu-utama/80 hover:bg-ungu-utama py-2 rounded-lg mb-2">Beli</button>
+
+                    <div class="flex justify-between items-center py-2">
                         <span>1024 Diamond</span>
-                        <span class="font-bold text-green-400">Rp 265.000</span>
+                        <span class="text-green-400 font-bold">Rp 265.000</span>
                     </div>
+                    <button onclick="lanjutBayar('Mobile Legends', '1024 Diamond', 265000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli Sekarang</button>
                 </div>
-                <button class="w-full mt-4 bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg font-medium">Beli Sekarang</button>
             </div>
 
-            <!-- 2. Free Fire -->
-            <div class="game-card bg-white/10 rounded-xl p-5 border border-white/10 hover:border-ungu-terang">
-                <div class="flex items-center gap-4 mb-4">
-                    <img src="https://files.catbox.moe/00jh4l.jpg" class="w-16 h-16 rounded-lg object-cover">
+            <!-- 2. FREE FIRE -->
+            <div class="game-card bg-white/10 rounded-2xl p-6 border border-white/10">
+                <div class="flex items-center gap-4 mb-5">
+                    <img src="https://files.catbox.moe/00jh4l.jpg" class="w-20 h-20 rounded-xl object-cover">
                     <div>
-                        <h3 class="font-bold text-xl">Free Fire</h3>
-                        <p class="text-gray-400 text-sm">Diamond</p>
+                        <h3 class="text-2xl font-bold">Free Fire</h3>
+                        <p class="text-gray-400">Diamond</p>
                     </div>
                 </div>
-                <div class="space-y-2 text-sm">
-                    <div class="flex justify-between py-1 border-b border-white/5">
+                <div class="space-y-3 mb-5">
+                    <div class="flex justify-between items-center py-2 border-b border-white/5">
                         <span>70 Diamond</span>
-                        <span class="font-bold text-green-400">Rp 12.500</span>
+                        <span class="text-green-400 font-bold">Rp 12.500</span>
                     </div>
-                    <div class="flex justify-between py-1 border-b border-white/5">
+                    <button onclick="lanjutBayar('Free Fire', '70 Diamond', 12500)" class="w-full bg-ungu-utama/80 hover:bg-ungu-utama py-2 rounded-lg mb-2">Beli</button>
+
+                    <div class="flex justify-between items-center py-2 border-b border-white/5">
                         <span>140 Diamond</span>
-                        <span class="font-bold text-green-400">Rp 24.000</span>
+                        <span class="text-green-400 font-bold">Rp 24.000</span>
                     </div>
-                    <div class="flex justify-between py-1 border-b border-white/5">
+                    <button onclick="lanjutBayar('Free Fire', '140 Diamond', 24000)" class="w-full bg-ungu-utama/80 hover:bg-ungu-utama py-2 rounded-lg mb-2">Beli</button>
+
+                    <div class="flex justify-between items-center py-2 border-b border-white/5">
                         <span>355 Diamond</span>
-                        <span class="font-bold text-green-400">Rp 59.000</span>
+                        <span class="text-green-400 font-bold">Rp 59.000</span>
                     </div>
-                    <div class="flex justify-between py-1 border-b border-white/5">
+                    <button onclick="lanjutBayar('Free Fire', '355 Diamond', 59000)" class="w-full bg-ungu-utama/80 hover:bg-ungu-utama py-2 rounded-lg mb-2">Beli</button>
+
+                    <div class="flex justify-between items-center py-2 border-b border-white/5">
                         <span>720 Diamond</span>
-                        <span class="font-bold text-green-400">Rp 118.000</span>
+                        <span class="text-green-400 font-bold">Rp 118.000</span>
                     </div>
-                    <div class="flex justify-between py-1">
+                    <button onclick="lanjutBayar('Free Fire', '720 Diamond', 118000)" class="w-full bg-ungu-utama/80 hover:bg-ungu-utama py-2 rounded-lg mb-2">Beli</button>
+
+                    <div class="flex justify-between items-center py-2">
                         <span>1440 Diamond</span>
-                        <span class="font-bold text-green-400">Rp 230.000</span>
+                        <span class="text-green-400 font-bold">Rp 230.000</span>
                     </div>
+                    <button onclick="lanjutBayar('Free Fire', '1440 Diamond', 230000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli Sekarang</button>
                 </div>
-                <button class="w-full mt-4 bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg font-medium">Beli Sekarang</button>
             </div>
 
-            <!-- 3. PUBG Mobile -->
-            <div class="game-card bg-white/10 rounded-xl p-5 border border-white/10 hover:border-ungu-terang">
-                <div class="flex items-center gap-4 mb-4">
-                    <img src="https://files.catbox.moe/xfxvzz.jpg" class="w-16 h-16 rounded-lg object-cover">
+            <!-- 3. PUBG MOBILE -->
+            <div class="game-card bg-white/10 rounded-2xl p-6 border border-white/10">
+                <div class="flex items-center gap-4 mb-5">
+                    <img src="https://files.catbox.moe/xfxvzz.jpg" class="w-20 h-20 rounded-xl object-cover">
                     <div>
-                        <h3 class="font-bold text-xl">PUBG Mobile</h3>
-                        <p class="text-gray-400 text-sm">UC</p>
+                        <h3 class="text-2xl font-bold">PUBG Mobile</h3>
+                        <p class="text-gray-400">UC</p>
                     </div>
                 </div>
-                <div class="space-y-2 text-sm">
-                    <div class="flex justify-between py-1 border-b border-white/5">
+                <div class="space-y-3 mb-5">
+                    <div class="flex justify-between items-center py-2 border-b border-white/5">
                         <span>60 UC</span>
-                        <span class="font-bold text-green-400">Rp 18.000</span>
+                        <span class="text-green-400 font-bold">Rp 18.000</span>
                     </div>
-                    <div class="flex justify-between py-1 border-b border-white/5">
+                    <button onclick="lanjutBayar('PUBG Mobile', '60 UC', 18000)" class="w-full bg-ungu-utama/80 hover:bg-ungu-utama py-2 rounded-lg mb-2">Beli</button>
+
+                    <div class="flex justify-between items-center py-2 border-b border-white/5">
                         <span>180 UC</span>
-                        <span class="font-bold text-green-400">Rp 52.000</span>
+                        <span class="text-green-400 font-bold">Rp 52.000</span>
                     </div>
-                    <div class="flex justify-between py-1 border-b border-white/5">
+                    <button onclick="lanjutBayar('PUBG Mobile', '180 UC', 52000)" class="w-full bg-ungu-utama/80 hover:bg-ungu-utama py-2 rounded-lg mb-2">Beli</button>
+
+                    <div class="flex justify-between items-center py-2 border-b border-white/5">
                         <span>300 UC</span>
-                        <span class="font-bold text-green-400">Rp 85.000</span>
+                        <span class="text-green-400 font-bold">Rp 85.000</span>
                     </div>
-                    <div class="flex justify-between py-1 border-b border-white/5">
+                    <button onclick="lanjutBayar('PUBG Mobile', '300 UC', 85000)" class="w-full bg-ungu-utama/80 hover:bg-ungu-utama py-2 rounded-lg mb-2">Beli</button>
+
+                    <div class="flex justify-between items-center py-2 border-b border-white/5">
                         <span>600 UC</span>
-                        <span class="font-bold text-green-400">Rp 165.000</span>
+                        <span class="text-green-400 font-bold">Rp 165.000</span>
                     </div>
-                    <div class="flex justify-between py-1">
+                    <button onclick="lanjutBayar('PUBG Mobile', '600 UC', 165000)" class="w-full bg-ungu-utama/80 hover:bg-ungu-utama py-2 rounded-lg mb-2">Beli</button>
+
+                    <div class="flex justify-between items-center py-2">
                         <span>1200 UC</span>
-                        <span class="font-bold text-green-400">Rp 320.000</span>
+                        <span class="text-green-400 font-bold">Rp 320.000</span>
                     </div>
+                    <button onclick="lanjutBayar('PUBG Mobile', '1200 UC', 320000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli Sekarang</button>
                 </div>
-                <button class="w-full mt-4 bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg font-medium">Beli Sekarang</button>
             </div>
 
-            <!-- 4. Genshin Impact -->
-            <div class="game-card bg-white/10 rounded-xl p-5 border border-white/10 hover:border-ungu-terang">
-                <div class="flex items-center gap-4 mb-4">
-                    <img src="https://files.catbox.moe/080ygh.jpg" class="w-16 h-16 rounded-lg object-cover">
+            <!-- 4. GENSHIN IMPACT -->
+            <div class="game-card bg-white/10 rounded-2xl p-6 border border-white/10">
+                <div class="flex items-center gap-4 mb-5">
+                    <img src="https://files.catbox.moe/080ygh.jpg" class="w-20 h-20 rounded-xl object-cover">
                     <div>
-                        <h3 class="font-bold text-xl">Genshin Impact</h3>
-                        <p class="text-gray-400 text-sm">Genesis Crystal</p>
+                        <h3 class="text-2xl font-bold">Genshin Impact</h3>
+                        <p class="text-gray-400">Genesis Crystal</p>
                     </div>
                 </div>
-                <div class="space-y-2 text-sm">
-                    <div class="flex justify-between py-1 border-b border-white/5">
+                <div class="space-y-3 mb-5">
+                    <div class="flex justify-between items-center py-2 border-b border-white/5">
                         <span>60 Kristal</span>
-                        <span class="font-bold text-green-400">Rp 16.000</span>
+                        <span class="text-green-400 font-bold">Rp 16.000</span>
                     </div>
-                    <div class="flex justify-between py-1 border-b border-white/5">
+                    <button onclick="lanjutBayar('Genshin Impact', '60 Kristal', 16000)" class="w-full bg-ungu-utama/80 hover:bg-ungu-utama py-2 rounded-lg mb-2">Beli</button>
+
+                    <div class="flex justify-between items-center py-2 border-b border-white/5">
                         <span>330 Kristal</span>
-                        <span class="font-bold text-green-400">Rp 79.000</span>
+                        <span class="text-green-400 font-bold">Rp 79.000</span>
                     </div>
-                    <div class="flex justify-between py-1 border-b border-white/5">
+                    <button onclick="lanjutBayar('Genshin Impact', '330 Kristal', 79000)" class="w-full bg-ungu-utama/80 hover:bg-ungu-utama py-2 rounded-lg mb-2">Beli</button>
+
+                    <div class="flex justify-between items-center py-2 border-b border-white/5">
                         <span>1090 Kristal</span>
-                        <span class="font-bold text-green-400">Rp 240.000</span>
+                        <span class="text-green-400 font-bold">Rp 240.000</span>
                     </div>
-                    <div class="flex justify-between py-1 border-b border-white/5">
+                    <button onclick="lanjutBayar('Genshin Impact', '1090 Kristal', 240000)" class="w-full bg-ungu-utama/80 hover:bg-ungu-utama py-2 rounded-lg mb-2">Beli</button>
+
+                    <div class="flex justify-between items-center py-2 border-b border-white/5">
                         <span>3280 Kristal</span>
-                        <span class="font-bold text-green-400">Rp 720.000</span>
+                        <span class="text-green-400 font-bold">Rp 720.000</span>
                     </div>
-                    <div class="flex justify-between py-1">
+                    <button onclick="lanjutBayar('Genshin Impact', '3280 Kristal', 720000)" class="w-full bg-ungu-utama/80 hover:bg-ungu-utama py-2 rounded-lg mb-2">Beli</button>
+
+                    <div class="flex justify-between items-center py-2">
                         <span>6480 Kristal</span>
-                        <span class="font-bold text-green-400">Rp 1.400.000</span>
+                        <span class="text-green-400 font-bold">Rp 1.400.000</span>
                     </div>
+                    <button onclick="lanjutBayar('Genshin Impact', '6480 Kristal', 1400000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli Sekarang</button>
                 </div>
-                <button class="w-full mt-4 bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg font-medium">Beli Sekarang</button>
             </div>
 
-            <!-- 5. Roblox -->
-            <div class="game-card bg-white/10 rounded-xl p-5 border border-white/10 hover:border-ungu-terang">
-                <div class="flex items-center gap-4 mb-4">
-                    <img src="https://files.catbox.moe/rsf4xo.jpg" class="w-16 h-16 rounded-lg object-cover">
+            <!-- 5. ROBLOX -->
+            <div class="game-card bg-white/10 rounded-2xl p-6 border border-white/10">
+                <div class="flex items-center gap-4 mb-5">
+                    <img src="https://files.catbox.moe/rsf4xo.jpg" class="w-20 h-20 rounded-xl object-cover">
                     <div>
-                        <h3 class="font-bold text-xl">Roblox</h3>
-                        <p class="text-gray-400 text-sm">Robux</p>
+                        <h3 class="text-2xl font-bold">Roblox</h3>
+                        <p class="text-gray-400">Robux</p>
                     </div>
                 </div>
-                <div class="space-y-2 text-sm">
-                    <div class="flex justify-between py-1 border-b border-white/5">
+                <div class="space-y-3 mb-5">
+                    <div class="flex justify-between items-center py-2 border-b border-white/5">
                         <span>80 Robux</span>
-                        <span class="font-bold text-green-400">Rp 22.000</span>
+                        <span class="text-green-400 font-bold">Rp 22.000</span>
                     </div>
-                    <div class="flex justify-between py-1 border-b border-white/5">
+                    <button onclick="lanjutBayar('Roblox', '80 Robux', 22000)" class="w-full bg-ungu-utama/80 hover:bg-ungu-utama py-2 rounded-lg mb-2">Beli</button>
+
+                    <div class="flex justify-between items-center py-2 border-b border-white/5">
                         <span>400 Robux</span>
-                        <span class="font-bold text-green-400">Rp 95.000</span>
+                        <span class="text-green-400 font-bold">Rp 95.000</span>
                     </div>
-                    <div class="flex justify-between py-1 border-b border-white/5">
+                    <button onclick="lanjutBayar('Roblox', '400 Robux', 95000)" class="w-full bg-ungu-utama/80 hover:bg-ungu-utama py-2 rounded-lg mb-2">Beli</button>
+
+                    <div class="flex justify-between items-center py-2 border-b border-white/5">
                         <span>800 Robux</span>
-                        <span class="font-bold text-green-400">Rp 180.000</span>
+                        <span class="text-green-400 font-bold">Rp 180.000</span>
                     </div>
-                    <div class="flex justify-between py-1 border-b border-white/5">
+                    <button onclick="lanjutBayar('Roblox', '800 Robux', 180000)" class="w-full bg-ungu-utama/80 hover:bg-ungu-utama py-2 rounded-lg mb-2">Beli</button>
+
+                    <div class="flex justify-between items-center py-2 border-b border-white/5">
                         <span>1700 Robux</span>
-                        <span class="font-bold text-green-400">Rp 360.000</span>
+                        <span class="text-green-400 font-bold">Rp 360.000</span>
                     </div>
-                    <div class="flex justify-between py-1">
+                    <button onclick="lanjutBayar('Roblox', '1700 Robux', 360000)" class="w-full bg-ungu-utama/80 hover:bg-ungu-utama py-2 rounded-lg mb-2">Beli</button>
+
+                    <div class="flex justify-between items-center py-2">
                         <span>4500 Robux</span>
-                        <span class="font-bold text-green-400">Rp 880.000</span>
+                        <span class="text-green-400 font-bold">Rp 880.000</span>
                     </div>
+                    <button onclick="lanjutBayar('Roblox', '4500 Robux', 880000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli Sekarang</button>
                 </div>
-                <button class="w-full mt-4 bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg font-medium">Beli Sekarang</button>
             </div>
 
-            <!-- 6. Higgs Domino -->
-            <div class="game-card bg-white/10 rounded-xl p-5 border border-white/10 hover:border-ungu-terang">
-                <div class="flex items-center gap-4 mb-4">
-                    <img src="https://files.catbox.moe/hpyri8.jpg" class="w-16 h-16 rounded-lg object-cover">
+            <!-- 6. HIGGS DOMINO -->
+            <div class="game-card bg-white/10 rounded-2xl p-6 border border-white/10">
+                <div class="flex items-center gap-4 mb-5">
+                    <img src="https://files.catbox.moe/hpyri8.jpg" class="w-20 h-20 rounded-xl object-cover">
                     <div>
-                        <h3 class="font-bold text-xl">Higgs Domino</h3>
-                        <p class="text-gray-400 text-sm">Koin Emas</p>
+                        <h3 class="text-2xl font-bold">Higgs Domino</h3>
+                        <p class="text-gray-400">Koin Emas</p>
                     </div>
                 </div>
-                <div class="space-y-2 text-sm">
-                    <div class="flex justify-between py-1 border-b border-white/5">
+                <div class="space-y-3 mb-5">
+                    <div class="flex justify-between items-center py-2 border-b border-white/5">
                         <span>100 M</span>
-                        <span class="font-bold text-green-400">Rp 12.000</span>
+                        <span class="text-green-400 font-bold">Rp 12.000</span>
                     </div>
-                    <div class="flex justify-between py-1 border-b border-white/5">
-                        <span>500 M</span>
-                        <span class="font-bold text-green-400">Rp 55.000</span>
-                    </div>
-                    <div class="flex justify-between py-1 border-b border-white/5">
-                        <span>1 B</span>
-                        <span class="font-bold text-green-400">Rp 105.000</span>
-                    </div>
-                    <div class="flex justify-between py-1 border-b border-white/5">
-                        <span>5 B</span>
-                        <span class="font-bold text-green-400">Rp 500.000</span>
-                    </div>
-                    <div class="flex justify-between py-1">
-                        <span>10 B</span>
-                        <span class="font-bold text-green-400">Rp 950.000</span>
-                    </div>
-                </div>
-                <button class="w-full mt-4 bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg font-medium">Beli Sekarang</button>
-            </div>
+                    <button onclick="lanjutBayar('Higgs Domino', '100 M', 12000)" class="w-full bg-ungu-utama/80 hover:bg-ungu-utama py-2 rounded-lg mb-2">Beli</button>
 
-            <!-- Tambahkan sisa game lain dengan pola yang sama -->
+                    <div class="flex justify-between items-center py-2 border-b border-white/5">
+                        <span>500 M</span>
+                        <span class="text-green-400 font-bold">Rp 55.000</span>
+                    </div>
+                    <button onclick="lanjutBayar('Higgs Domino', '500 M', 55000)" class="w-full bg-ungu-utama/80 hover:bg-ungu-utama py-2 rounded-lg mb-2">Beli</button>
+
+                    <div class="flex justify-between items-center py-2 border-b border-white/5">
+                        <span>1 B</span>
+                        <span class="text-green-400 font-bold">Rp 105.000</span>
+                    </div>
+                    <button onclick="lanjutBayar('Higgs Domino', '1 B', 105000)" class="w-full bg-ungu-utama/80 hover:bg-ungu-utama py-2 rounded-lg mb-2">Beli</button>
+
+                    <div class="flex justify-between items-center py-2 border-b border-white/5">
+                        <span>5 B</span>
+                        <span class="text-green-400 font-bold">Rp 500.000</span>
+                    </div>
+                    <button onclick="lanjutBayar('Higgs Domino', '5 B', 500000)" class="w-full bg-ungu-utama/80 hover:bg-ungu-utama py-2 rounded-lg mb-2">Beli</button>
+
+                    <div class="flex justify-between items-center py-2">
+                        <span>10 B</span>
+                        <span class="text-green-400 font-bold">Rp 950.000</span>
+                    </div>
+                    <button onclick="lanjutBayar('Higgs Domino', '10 B', 950000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli Sekarang</button>
+                </div>
+            </div>
 
         </div>
 
@@ -321,10 +359,11 @@
             }
         }
 
-        // FUNGSI KE HALAMAN PEMBAYARAN
-        function bukaPembayaran(namaGame, jenis) {
+        // FUNGSI TOMBOL BELI - PASTI JALAN
+        function lanjutBayar(namaGame, item, harga) {
             localStorage.setItem("gameDipilih", namaGame);
-            localStorage.setItem("jenisItem", jenis);
+            localStorage.setItem("itemDipilih", item);
+            localStorage.setItem("totalHarga", harga);
             window.location.href = "pembayaran.html";
         }
     </script>
