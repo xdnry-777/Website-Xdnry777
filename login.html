@@ -18,13 +18,11 @@
             <p class="text-gray-500 mt-2">Silakan Masuk Akun</p>
         </div>
 
-        <!-- Tab Pilihan Login -->
         <div class="flex mb-6 rounded-lg overflow-hidden">
             <button onclick="bukaTab('google')" id="tabGoogle" class="flex-1 py-3 font-bold tab-aktif">Google</button>
             <button onclick="bukaTab('manual')" id="tabManual" class="flex-1 py-3 font-bold tab-non">Manual</button>
         </div>
 
-        <!-- Form Login Google (Firebase Asli) -->
         <div id="formGoogle">
             <button onclick="loginGoogle()" class="w-full flex items-center justify-center border border-gray-300 rounded-lg py-3 px-4 hover:bg-gray-50 transition mb-4">
                 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="w-6 h-6 mr-3">
@@ -32,7 +30,6 @@
             </button>
         </div>
 
-        <!-- Form Login Manual -->
         <div id="formManual" class="hidden space-y-4">
             <div>
                 <label class="text-sm text-gray-600 mb-1 block">Username / Email</label>
@@ -54,13 +51,12 @@
         </div>
     </div>
 
-    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     <script src="auth.js"></script>
 
     <script>
-        // ==============================================
+        // === KONFIGURASI FIREBASE KAMU ===
         const firebaseConfig = {
   apiKey: "AIzaSyDd4gqKYDZBJ9UVO94SD-sJmmxmV6C6alE",
   authDomain: "xdnry777-efc70.firebaseapp.com",
@@ -70,7 +66,7 @@
   appId: "1:556638960997:web:f726355f744b69ddf5758c",
   measurementId: "G-GXKXVYQFBM"
 };
-        // ==============================================
+        // =================================
 
         firebase.initializeApp(firebaseConfig);
 
@@ -81,22 +77,20 @@
             document.getElementById('tabManual').className = `flex-1 py-3 font-bold ${jenis === 'manual' ? 'tab-aktif' : 'tab-non'}`;
         }
 
-        // Fungsi Login Google Asli Firebase
         function loginGoogle() {
             const provider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().signInWithPopup(provider)
             .then((hasil) => {
                 const user = hasil.user;
                 setLogin(user.displayName, user.email);
-                alert('✅ Berhasil Masuk! Selamat Datang ' + user.displayName);
-                window.location.href = 'pilih-game.html';
+                alert("✅ Berhasil Masuk!\nSelamat Datang: " + user.displayName);
+                window.location.href = "pilih-game.html";
             })
             .catch((error) => {
-                alert('❌ Gagal Masuk: ' + error.message);
+                alert("❌ Gagal Masuk: " + error.message);
             });
         }
 
-        // Login Manual
         function cekLoginManual() {
             const user = document.getElementById('loginUser').value.trim();
             const pass = document.getElementById('loginPass').value;
@@ -106,7 +100,7 @@
             if (akun) {
                 setLogin(akun.nama, akun.email);
                 alert('✅ Berhasil Masuk! Selamat Datang ' + akun.nama);
-                window.location.href = 'pilih-game.html';
+                window.location.href = "pilih-game.html";
             } else {
                 alert('❌ Username/Email atau Kata Sandi salah!');
             }
