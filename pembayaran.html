@@ -50,12 +50,12 @@
             <div class="space-y-3">
                 <label class="flex items-center gap-3 p-3 border border-white/20 rounded-lg cursor-pointer hover:border-ungu-terang">
                     <input type="radio" name="bayar" checked class="accent-ungu-terang">
-                    <img src="https://files.catbox.moe/g2agou.jpg" class="w-8 h-8">
+                    <img src="https://files.catbox.moe/oe94n4.jpg" class="w-8 h-8">
                     <span class="font-medium">QRIS (Semua Aplikasi)</span>
                 </label>
                 <label class="flex items-center gap-3 p-3 border border-white/20 rounded-lg cursor-pointer hover:border-ungu-terang">
                     <input type="radio" name="bayar" class="accent-ungu-terang">
-                    <img src="https://i.imgur.com/hdT8ZSy.png" class="w-8 h-8">
+                    <img src="https://files.catbox.moe/uqsxjc.jpg" class="w-8 h-8">
                     <span class="font-medium">DANA</span>
                 </label>
             </div>
@@ -78,15 +78,21 @@
         </button>
     </main>
 
-    <script>
-        document.getElementById("gameDipilih").textContent = localStorage.getItem("gameDipilih");
-        document.getElementById("jenisItem").textContent = localStorage.getItem("jenisItem");
-        document.getElementById("totalHarga").textContent = "Rp 31.000";
+   <script>
+// Ambil data yang dikirim dari halaman pilih game
+document.getElementById("gameDipilih").textContent = localStorage.getItem("gameDipilih") || "-";
+document.getElementById("jenisItem").textContent = localStorage.getItem("itemDipilih") || "-"; // Nama item muncul disini!
 
-        function konfirmasi() {
-            alert("✅ Terima Kasih!\nPesananmu akan segera diproses setelah pembayaran terverifikasi.");
-            window.location.href = "index.html";
-        }
-    </script>
-</body>
-</html>
+// Tampilkan harga otomatis sesuai pilihan
+const harga = localStorage.getItem("totalHarga");
+if (harga) {
+    document.getElementById("totalHarga").textContent = "Rp " + Number(harga).toLocaleString("id-ID");
+} else {
+    document.getElementById("totalHarga").textContent = "Rp 0";
+}
+
+function konfirmasi() {
+    alert("✅ Terima Kasih!\nPesananmu akan segera diproses.");
+    window.location.href = "index.html";
+}
+</script>
