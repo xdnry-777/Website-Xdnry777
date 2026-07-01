@@ -7,108 +7,85 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
-        tailwind.config = { theme: { extend: { colors: { ungu: { utama:'#6B21A8', terang:'#A855F7', neon:'#D946EF' } } } } }
+        tailwind.config = { theme: { extend: { colors: { ungu: { utama:'#6B21A8', terang:'#A855F7' } } } } }
     </script>
-    <style>.bg-gradasi { background: linear-gradient(135deg, #050505 0%, #1A102E 40%, #4C1D95 100%); } .bg-card { background: linear-gradient(145deg, rgba(107,33,168,0.2), rgba(45,12,94,0.3)); }</style>
+    <style>body { background: linear-gradient(135deg, #050505 0%, #1A102E 40%, #4C1D95 100%); min-height: 100vh; }</style>
 </head>
-<body class="bg-gradasi min-h-screen font-sans text-white">
-    <div id="menuSamping" class="-translate-x-full fixed top-0 left-0 h-full w-72 bg-gray-900/98 backdrop-blur-md z-[60] transition-transform duration-300 border-r border-ungu-utama/30">
-        <div class="p-4 h-full flex flex-col">
-            <div class="flex justify-between items-center mb-6 pb-4 border-b border-ungu-utama/30">
-                <span class="text-xl font-bold text-ungu-terang">⚡ Xdnry777</span>
-                <button onclick="tutupMenu()" class="text-xl"><i class="fa fa-times"></i></button>
-            </div>
-            <div class="menu-user mb-4"></div>
-            <nav class="flex-1 space-y-2">
-                <a href="index.html" class="flex items-center gap-3 p-3 rounded-lg hover:bg-ungu-utama/30"><i class="fa fa-home w-5"></i> Beranda</a>
-                <a href="pilih-game.html" class="flex items-center gap-3 p-3 rounded-lg hover:bg-ungu-utama/30"><i class="fa fa-gamepad w-5"></i> Top Up Game</a>
-                <a href="riwayat.html" class="flex items-center gap-3 p-3 rounded-lg hover:bg-ungu-utama/30"><i class="fa fa-history w-5"></i> Riwayat Pesanan</a>
-                <a href="bantuan.html" class="flex items-center gap-3 p-3 rounded-lg hover:bg-ungu-utama/30"><i class="fa fa-question-circle w-5"></i> Bantuan</a>
-                <a href="syarat.html" class="flex items-center gap-3 p-3 rounded-lg hover:bg-ungu-utama/30"><i class="fa fa-file-text w-5"></i> Syarat & Ketentuan</a>
-            </nav>
-            <div class="mt-auto pt-4 border-t border-ungu-utama/30 text-center text-sm text-gray-400">© 2026 Xdnry777</div>
-        </div>
-    </div>
-    <div onclick="tutupMenu()" class="hidden fixed inset-0 bg-black/50 z-50" id="lapisanTutup"></div>
+<body class="text-white font-sans">
 
-    <nav class="backdrop-blur-md bg-black/30 sticky top-0 z-40 border-b border-ungu-utama/30">
-        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
-            <button onclick="bukaMenu()" class="text-2xl"><i class="fa fa-bars"></i></button>
-            <div class="area-user"></div>
-        </div>
-    </nav>
-
-    <section class="container mx-auto px-4 py-10">
-        <a href="pilih-game.html" class="inline-flex items-center text-ungu-terang mb-6"><i class="fa fa-arrow-left mr-2"></i>Kembali</a>
-        <h1 class="text-2xl font-bold mb-8 text-center">Selesaikan Pembayaran</h1>
-
-        <div class="max-w-xl mx-auto space-y-6">
-            <div class="bg-card rounded-xl p-6 border border-ungu-utama/40">
-                <h2 class="text-lg font-semibold mb-4 border-b border-ungu-utama/30 pb-2">Ringkasan Pesanan</h2>
-                <div class="space-y-2 text-gray-300">
-                    <div class="flex justify-between"><span>Layanan</span><span id="tNama" class="font-medium">-</span></div>
-                    <div class="flex justify-between"><span>ID Akun</span><span id="tId" class="font-medium">-</span></div>
-                    <div class="flex justify-between"><span>Nickname</span><span id="tNick" class="font-medium">-</span></div>
-                    <div class="flex justify-between"><span>Item</span><span id="tItem" class="font-medium">-</span></div>
-                    <div class="flex justify-between font-bold text-ungu-terang pt-2 border-t"><span>Total Bayar</span><span id="tTotal">-</span></div>
-                </div>
-            </div>
-
-            <div class="bg-card rounded-xl p-6 border border-ungu-utama/40">
-                <h2 class="text-lg font-semibold mb-4">Pilih Metode Pembayaran</h2>
-                <label class="mb-5 p-4 border border-ungu-terang/50 rounded-lg bg-ungu-terang/10 flex items-center gap-3 cursor-pointer block">
-                    <input type="radio" name="metode" value="QRIS" checked class="w-5 h-5 accent-ungu-terang">
-                    <span class="text-xl font-bold">QRIS</span>
-                    <span class="text-xs bg-ungu-neon px-2 py-0.5 rounded">NOXZCRUEL</span>
-                </label>
-                <div class="mb-5 text-center"><div class="bg-white p-4 rounded-lg inline-block"><img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=NOXZCRUEL" class="w-44 h-44 rounded"></div><p class="text-sm text-gray-400 mt-3">Scan dari aplikasi pembayaran apa saja</p></div>
-
-                <label class="p-4 border border-ungu-utama/30 rounded-lg flex items-center gap-3 cursor-pointer block">
-                    <input type="radio" name="metode" value="DANA" class="w-5 h-5 accent-ungu-terang">
-                    <span class="text-xl font-bold">DANA</span>
-                    <span class="text-xs bg-blue-500 px-2 py-0.5 rounded">Resmi</span>
-                </label>
-                <div class="mt-3 pl-8"><p class="text-xl font-bold text-ungu-terang">0851-6993-5089</p><p class="text-sm text-gray-400">a.n. EN**** YU******</p><p class="text-sm text-yellow-400 mt-2">+ Kode Unik Rp 50 → <b id="totalBayar">-</b></p></div>
-            </div>
-
-            <button onclick="proses()" class="w-full bg-gradient-to-r from-ungu-utama to-ungu-neon py-4 rounded-xl font-bold text-lg"><i class="fa fa-check-circle mr-2"></i>Saya Sudah Bayar</button>
-        </div>
-    </section>
-
-    <script src="auth.js"></script>
     <script>
-        window.onload = function() {
-            document.getElementById('tNama').textContent = localStorage.getItem('namaGame') || '-';
-            document.getElementById('tId').textContent = localStorage.getItem('id') || '-';
-            document.getElementById('tNick').textContent = localStorage.getItem('nickname') || '-';
-            document.getElementById('tItem').textContent = localStorage.getItem('item') || '-';
-            let harga = parseInt((localStorage.getItem('hargaDasar') || '0').replace(/\./g,''));
-            let total = harga + 50;
-            localStorage.setItem('totalAkhir', total);
-            document.getElementById('tTotal').textContent = 'Rp ' + total.toLocaleString('id-ID');
-            document.getElementById('totalBayar').textContent = 'Rp ' + total.toLocaleString('id-ID');
+        if (!localStorage.getItem("sudahLogin")) {
+            alert("⚠️ Silakan Login Dulu!");
+            window.location.href = "login.html";
         }
-        function proses() {
-            const metode = document.querySelector('input[name="metode"]:checked').value;
-            localStorage.setItem('metodeBayar', metode);
+    </script>
 
-            // Simpan ke Riwayat
-            let riwayat = JSON.parse(localStorage.getItem('riwayatPesanan') || '[]');
-            const waktu = new Date().toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'}) + ' ' + new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'}) + ' WIB';
-            riwayat.unshift({
-                namaGame: localStorage.getItem('namaGame'),
-                item: localStorage.getItem('item'),
-                id: localStorage.getItem('id'),
-                nickname: localStorage.getItem('nickname'),
-                metode: metode,
-                total: localStorage.getItem('totalAkhir')?.toLocaleString('id-ID'),
-                waktu: waktu
-            });
-            localStorage.setItem('riwayatPesanan', JSON.stringify(riwayat));
+    <header class="bg-black/40 backdrop-blur-md py-4 px-4 sticky top-0 z-30">
+        <div class="max-w-lg mx-auto flex items-center">
+            <a href="pilih-game.html" class="text-xl mr-4"><i class="fa fa-arrow-left"></i></a>
+            <h1 class="text-xl font-bold">Halaman Pembayaran</h1>
+        </div>
+    </header>
 
-            const pesan = `📋 STRUK XDNRY777\n✅ BERHASIL\n🎮 Game: ${localStorage.getItem('namaGame')}\n👤 ID: ${localStorage.getItem('id')}\n💬 Nick: ${localStorage.getItem('nickname')}\n💎 Item: ${localStorage.getItem('item')}\n💳 Metode: ${metode}\n💰 Bayar: Rp ${localStorage.getItem('totalAkhir')?.toLocaleString('id-ID')}\nTerima Kasih!`;
-            window.open(`https://wa.me/6285169935089?text=${encodeURIComponent(pesan)}`,'_blank');
-            setTimeout(()=>window.location.href='struk.html',600);
+    <main class="max-w-lg mx-auto px-4 py-8">
+        <!-- Ringkasan Pesanan -->
+        <div class="bg-white/10 rounded-2xl p-6 border border-white/10 mb-6">
+            <h2 class="text-xl font-bold mb-4">📋 Ringkasan Pesanan</h2>
+            <div class="space-y-2 text-gray-300">
+                <p>Nama Game : <span class="font-bold text-white" id="gameDipilih"></span></p>
+                <p>Item : <span class="font-bold text-white" id="jenisItem"></span></p>
+                <p>Total Bayar : <span class="font-bold text-green-400 text-lg" id="totalHarga">Rp 0</span></p>
+            </div>
+        </div>
+
+        <!-- ID Game -->
+        <div class="bg-white/10 rounded-2xl p-6 border border-white/10 mb-6">
+            <h3 class="text-lg font-bold mb-4">🆔 Masukkan ID Game</h3>
+            <input type="text" placeholder="Contoh: 12345678 (Server: 1234)" class="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white">
+        </div>
+
+        <!-- Pilih Metode Bayar -->
+        <div class="bg-white/10 rounded-2xl p-6 border border-white/10 mb-6">
+            <h3 class="text-lg font-bold mb-4">💳 Pilih Cara Bayar</h3>
+            <div class="space-y-3">
+                <label class="flex items-center gap-3 p-3 border border-white/20 rounded-lg cursor-pointer hover:border-ungu-terang">
+                    <input type="radio" name="bayar" checked class="accent-ungu-terang">
+                    <img src="https://files.catbox.moe/g2agou.jpg" class="w-8 h-8">
+                    <span class="font-medium">QRIS (Semua Aplikasi)</span>
+                </label>
+                <label class="flex items-center gap-3 p-3 border border-white/20 rounded-lg cursor-pointer hover:border-ungu-terang">
+                    <input type="radio" name="bayar" class="accent-ungu-terang">
+                    <img src="https://i.imgur.com/hdT8ZSy.png" class="w-8 h-8">
+                    <span class="font-medium">DANA</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- QRIS & Nomor DANA -->
+        <div class="bg-white/10 rounded-2xl p-6 border border-white/10 mb-6 text-center">
+            <h3 class="text-lg font-bold mb-4">📷 Scan QRIS</h3>
+            <div class="bg-white p-4 rounded-xl inline-block mb-4">
+                <img src="https://files.catbox.moe/g2agou.jpg" class="w-48 h-48 rounded-lg">
+            </div>
+            <p class="text-sm text-gray-400 mb-2">Atau bayar ke:</p>
+            <p class="text-xl font-bold text-ungu-terang mb-1">0851-6993-5089</p>
+            <p class="text-sm text-gray-400">a.n. EN**** YU******</p>
+        </div>
+
+        <!-- Tombol Konfirmasi -->
+        <button onclick="konfirmasi()" class="w-full bg-ungu-utama hover:bg-ungu-terang py-4 rounded-xl text-xl font-bold">
+            ✅ Sudah Bayar, Konfirmasi
+        </button>
+    </main>
+
+    <script>
+        document.getElementById("gameDipilih").textContent = localStorage.getItem("gameDipilih");
+        document.getElementById("jenisItem").textContent = localStorage.getItem("jenisItem");
+        document.getElementById("totalHarga").textContent = "Rp 31.000";
+
+        function konfirmasi() {
+            alert("✅ Terima Kasih!\nPesananmu akan segera diproses setelah pembayaran terverifikasi.");
+            window.location.href = "index.html";
         }
     </script>
 </body>
