@@ -3,43 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Xdnry777</title>
+    <title>Login / Daftar - Xdnry777</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <script>
         tailwind.config = {theme:{extend:{colors:{ungu:{utama:'#6B21A8',terang:'#A855F7'}}}}}
     </script>
     <style>
-        body{background:linear-gradient(180deg,#050505 0%,#1A102E 40%,#4C1D95 100%);min-height:100vh;}
+        body{background:linear-gradient(135deg,#050505 0%,#1A102E 40%,#4C1D95 100%);min-height:100vh;}
     </style>
 </head>
-<body class="text-white font-sans flex items-center justify-center px-4">
+<body class="text-white font-sans flex items-center justify-center p-4">
     <div class="w-full max-w-md">
         <div class="text-center mb-8">
-            <h1 class="text-4xl font-extrabold text-ungu-terang">⚡ Xdnry777</h1>
-            <p class="text-gray-300 mt-2">Masuk untuk mulai top up</p>
+            <div class="text-5xl mb-2">⚡</div>
+            <h1 class="text-3xl font-extrabold text-ungu-terang">Xdnry777 STORE</h1>
+            <p class="text-gray-400">Layanan Top Up Game Terpercaya</p>
         </div>
 
-        <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10">
-            <label class="block mb-2 font-medium">Nama Kamu</label>
-            <input type="text" id="nama" placeholder="Masukkan nama kamu" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 focus:outline-none focus:ring-2 focus:ring-ungu-terang mb-4" required>
+        <!-- FORM LOGIN -->
+        <div id="formLogin" class="bg-white/10 rounded-xl p-6 border border-white/10">
+            <h2 class="text-xl font-bold mb-5 text-center">Masuk Akun</h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block mb-1 text-sm">Username / Email</label>
+                    <input type="text" id="userLogin" class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:ring-2 focus:ring-ungu-terang">
+                </div>
+                <div>
+                    <label class="block mb-1 text-sm">Kata Sandi</label>
+                    <input type="password" id="passLogin" class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:ring-2 focus:ring-ungu-terang">
+                </div>
+                <button onclick="loginAkun()" class="w-full bg-ungu-utama hover:bg-ungu-terang py-3 rounded-lg font-bold text-lg">Masuk</button>
+            </div>
+            <p class="text-center mt-4 text-sm text-gray-400">Belum punya akun? <a href="#" onclick="tampilDaftar()" class="text-ungu-terang font-medium">Daftar Sekarang</a></p>
+        </div>
 
-            <button onclick="login()" class="w-full bg-ungu-utama hover:bg-ungu-terang py-3 rounded-xl font-bold text-lg transition-all">
-                Masuk
-            </button>
+        <!-- FORM DAFTAR -->
+        <div id="formDaftar" class="hidden bg-white/10 rounded-xl p-6 border border-white/10">
+            <h2 class="text-xl font-bold mb-5 text-center">Buat Akun Baru</h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block mb-1 text-sm">Username</label>
+                    <input type="text" id="userDaftar" class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:ring-2 focus:ring-ungu-terang">
+                </div>
+                <div>
+                    <label class="block mb-1 text-sm">Email Aktif</label>
+                    <input type="email" id="emailDaftar" class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:ring-2 focus:ring-ungu-terang">
+                </div>
+                <div>
+                    <label class="block mb-1 text-sm">Kata Sandi</label>
+                    <input type="password" id="passDaftar" class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:ring-2 focus:ring-ungu-terang">
+                </div>
+                <button onclick="daftarAkun()" class="w-full bg-green-600 hover:bg-green-500 py-3 rounded-lg font-bold text-lg">Daftar Akun</button>
+            </div>
+            <p class="text-center mt-4 text-sm text-gray-400">Sudah punya akun? <a href="#" onclick="tampilLogin()" class="text-ungu-terang font-medium">Masuk Sini</a></p>
         </div>
     </div>
 
     <script>
-        function login(){
-            const nama = document.getElementById('nama').value.trim();
-            if(nama.length < 2){
-                alert('⚠️ Nama minimal 2 huruf!');
-                return;
-            }
-            localStorage.setItem('namaPengguna', nama);
-            localStorage.setItem('sudahLogin', 'ya');
-            window.location.href = 'index.html';
+        function tampilLogin(){document.getElementById('formLogin').classList.remove('hidden');document.getElementById('formDaftar').classList.add('hidden');}
+        function tampilDaftar(){document.getElementById('formLogin').classList.add('hidden');document.getElementById('formDaftar').classList.remove('hidden');}
+
+        function daftarAkun(){
+            const user = document.getElementById('userDaftar').value.trim();
+            const email = document.getElementById('emailDaftar').value.trim();
+            const pass = document.getElementById('passDaftar').value.trim();
+
+            if(user.length<3 || email.length<5 || pass.length<4){alert('⚠️ Isi semua data dengan benar!');return;}
+
+            let dataAkun = JSON.parse(localStorage.getItem('daftarAkun') || '[]');
+            const cek = dataAkun.find(x => x.username === user || x.email === email);
+            if(cek){alert('⚠️ Username atau Email sudah terdaftar!');return;}
+
+            dataAkun.push({username:user, email:email, password:pass});
+            localStorage.setItem('daftarAkun', JSON.stringify(dataAkun));
+            alert('✅ Akun berhasil dibuat! Silakan Login.');
+            tampilLogin();
         }
+
+        function loginAkun(){
+            const masuk = document.getElementById('userLogin').value.trim();
+            const sandi = document.getElementById('passLogin').value.trim();
+
+            let dataAkun = JSON.parse(localStorage.getItem('daftarAkun') || '[]');
+            const akun = dataAkun.find(x => (x.username === masuk || x.email === masuk) && x.password === sandi);
+
+            if(!akun){alert('⚠️ Username/Email atau Kata Sandi salah!');return;}
+
+            localStorage.setItem('sudahLogin', 'YA');
+            localStorage.setItem('namaUser', akun.username);
+            localStorage.setItem('emailUser', akun.email);
+            window.location.href='index.html';
+        }
+
+        if(localStorage.getItem('sudahLogin') === 'YA') window.location.href='index.html';
     </script>
 </body>
 </html>
