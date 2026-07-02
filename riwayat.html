@@ -3,48 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riwayat - Xdnry777</title>
+    <title>Riwayat Pesanan - Xdnry777</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <script>
         tailwind.config = {theme:{extend:{colors:{ungu:{utama:'#6B21A8',terang:'#A855F7'}}}}}
     </script>
-    <style>body{background:linear-gradient(135deg,#050505 0%,#1A102E 40%,#4C1D95 100%);min-height:100vh;}</style>
+    <style>
+        body{background:linear-gradient(135deg,#050505 0%,#1A102E 40%,#4C1D95 100%);min-height:100vh;}
+        .sidebar{transform:translateX(-100%);transition:0.3s ease;}
+        .sidebar.buka{transform:translateX(0);}
+        .kartu-riwayat:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(168,85,247,0.2);}
+        .kartu-riwayat{transition:all 0.3s ease;cursor:pointer;}
+    </style>
 </head>
 <body class="text-white font-sans">
-    <script>if(!localStorage.getItem('sudahLogin')){alert('Silakan Login Dulu!');window.location.href='login.html';}</script>
+    <script>if(!localStorage.getItem('sudahLogin')){alert('⚠️ Silakan Login Dulu!');window.location.href='login.html';}</script>
 
+    <!-- SIDEBAR MENU -->
+    <div id="sidebar" class="sidebar fixed top-0 left-0 h-full w-64 bg-black/95 z-50 p-5">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold text-ungu-terang">Menu</h2>
+            <button onclick="tutupMenu()" class="text-2xl">&times;</button>
+        </div>
+        <div class="space-y-4 text-lg">
+            <a href="index.html" class="block py-2 hover:text-ungu-terang"><i class="fa fa-home mr-2"></i>Beranda</a>
+            <a href="pilih-game.html" class="block py-2 hover:text-ungu-terang"><i class="fa fa-gamepad mr-2"></i>Pilih Game</a>
+            <a href="riwayat.html" class="block py-2 hover:text-ungu-terang text-ungu-terang"><i class="fa fa-history mr-2"></i>Riwayat Pesanan</a>
+            <a href="bantuan.html" class="block py-2 hover:text-ungu-terang"><i class="fa fa-question-circle mr-2"></i>Pusat Bantuan</a>
+            <a href="syarat.html" class="block py-2 hover:text-ungu-terang"><i class="fa fa-file-text mr-2"></i>Syarat & Ketentuan</a>
+            <hr class="border-white/10">
+            <button onclick="keluar()" class="w-full text-left py-2 text-red-400 hover:text-red-300"><i class="fa fa-sign-out mr-2"></i>Keluar Akun</button>
+        </div>
+    </div>
+    <div id="latar" onclick="tutupMenu()" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
+
+    <!-- HEADER -->
     <header class="bg-black/40 backdrop-blur-md py-4 px-4 sticky top-0 z-30">
-        <div class="max-w-lg mx-auto flex items-center">
-            <a href="index.html" class="text-xl mr-4"><i class="fa fa-arrow-left"></i></a>
+        <div class="max-w-lg mx-auto flex justify-between items-center">
+            <button onclick="bukaMenu()" class="text-2xl"><i class="fa fa-bars"></i></button>
             <h1 class="text-xl font-bold">Riwayat Pesanan</h1>
+            <div></div>
         </div>
     </header>
 
     <main class="max-w-lg mx-auto px-4 py-8">
         <div id="daftar" class="space-y-4"></div>
-        <div id="kosong" class="text-center py-16 text-gray-400 hidden">
+        <div id="kosong" class="text-center py-20 text-gray-400">
             <i class="fa fa-history text-5xl mb-4"></i>
-            <p>Belum ada riwayat</p>
+            <p class="text-lg">Belum ada riwayat pesanan</p>
+            <a href="pilih-game.html" class="inline-block mt-4 text-ungu-terang hover:underline">Mulai Top Up Sekarang</a>
         </div>
     </main>
 
     <script>
-        let riwayat=JSON.parse(localStorage.getItem('riwayat')||'[]');
-        const wadah=document.getElementById('daftar');
-        if(riwayat.length===0){
-            document.getElementById('kosong').classList.remove('hidden');
-        }else{
-            riwayat.reverse().forEach(r=>{
-                wadah.innerHTML+=`
-                <div class="bg-white/10 rounded-xl p-5 border border-white/10">
-                    <div class="flex justify-between mb-2"><h3 class="font-bold">${r.game}</h3><span class="text-green-400 text-sm">Berhasil</span></div>
-                    <p class="text-sm text-gray-300">${r.item}</p>
-                    <p class="text-xs text-gray-500">${r.tgl}</p>
-                    <p class="text-lg font-bold text-green-400 mt-2">${r.total}</p>
-                </div>`;
+        let riwayat = JSON.parse(localStorage.getItem('riwayat') || '[]');
+        const wadah = document.getElementById('daftar');
+        const pesanKosong = document.getElementById('kosong');
+
+        if(riwayat.length > 0){
+            pesanKosong.classList.add('hidden');
+            // Urutkan dari yang TERBARU
+            riwayat.reverse().forEach((item, indeks) => {
+                const kartu = document.createElement('div');
+                kartu.className = 'kartu-riwayat bg-white/10 rounded-xl p-5 border border-white/10';
+                kartu.innerHTML = `
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-bold text-lg">${item.game}</h3>
+                        <span class="text-xs px-2 py-1 rounded-full bg-green-500/20 text-green-400">Berhasil</span>
+                    </div>
+                    <p class="text-gray-300 text-sm">${item.item}</p>
+                    <p class="text-gray-500 text-xs mt-1">${item.tanggal}</p>
+                    <p class="text-xl font-bold text-green-400 mt-2">${item.total}</p>
+                    <p class="text-center text-sm text-ungu-terang mt-3">Klik untuk lihat detail struk →</p>
+                `;
+                // Saat diklik, simpan data ini lalu buka halaman struk detail
+                kartu.onclick = () => {
+                    localStorage.setItem('detailStruk', JSON.stringify(item));
+                    window.location.href = 'struk-detail.html';
+                };
+                wadah.appendChild(kartu);
             });
         }
+
+        // Fungsi Menu
+        function bukaMenu(){document.getElementById('sidebar').classList.add('buka');document.getElementById('latar').classList.remove('hidden');}
+        function tutupMenu(){document.getElementById('sidebar').classList.remove('buka');document.getElementById('latar').classList.add('hidden');}
+        function keluar(){if(confirm('Yakin keluar?')){localStorage.clear();window.location.href='login.html';}}
     </script>
 </body>
 </html>
