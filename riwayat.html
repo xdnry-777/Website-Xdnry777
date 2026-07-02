@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riwayat - Xdnry777</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <script>
+        tailwind.config = {theme:{extend:{colors:{ungu:{utama:'#6B21A8',terang:'#A855F7'}}}}}
+    </script>
+    <style>body{background:linear-gradient(135deg,#050505 0%,#1A102E 40%,#4C1D95 100%);min-height:100vh;}</style>
+</head>
+<body class="text-white font-sans">
+    <script>if(!localStorage.getItem('sudahLogin')){alert('Silakan Login Dulu!');window.location.href='login.html';}</script>
+
+    <header class="bg-black/40 backdrop-blur-md py-4 px-4 sticky top-0 z-30">
+        <div class="max-w-lg mx-auto flex items-center">
+            <a href="index.html" class="text-xl mr-4"><i class="fa fa-arrow-left"></i></a>
+            <h1 class="text-xl font-bold">Riwayat Pesanan</h1>
+        </div>
+    </header>
+
+    <main class="max-w-lg mx-auto px-4 py-8">
+        <div id="daftar" class="space-y-4"></div>
+        <div id="kosong" class="text-center py-16 text-gray-400 hidden">
+            <i class="fa fa-history text-5xl mb-4"></i>
+            <p>Belum ada riwayat</p>
+        </div>
+    </main>
+
+    <script>
+        let riwayat=JSON.parse(localStorage.getItem('riwayat')||'[]');
+        const wadah=document.getElementById('daftar');
+        if(riwayat.length===0){
+            document.getElementById('kosong').classList.remove('hidden');
+        }else{
+            riwayat.reverse().forEach(r=>{
+                wadah.innerHTML+=`
+                <div class="bg-white/10 rounded-xl p-5 border border-white/10">
+                    <div class="flex justify-between mb-2"><h3 class="font-bold">${r.game}</h3><span class="text-green-400 text-sm">Berhasil</span></div>
+                    <p class="text-sm text-gray-300">${r.item}</p>
+                    <p class="text-xs text-gray-500">${r.tgl}</p>
+                    <p class="text-lg font-bold text-green-400 mt-2">${r.total}</p>
+                </div>`;
+            });
+        }
+    </script>
+</body>
+</html>

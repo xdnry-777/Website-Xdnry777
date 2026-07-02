@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran - Xdnry777</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <script>
+        tailwind.config = {theme:{extend:{colors:{ungu:{utama:'#6B21A8',terang:'#A855F7'}}}}}
+    </script>
+    <style>body{background:linear-gradient(135deg,#050505 0%,#1A102E 40%,#4C1D95 100%);min-height:100vh;}</style>
+</head>
+<body class="text-white font-sans">
+    <script>if(!localStorage.getItem('sudahLogin')){alert('Silakan Login Dulu!');window.location.href='login.html';}</script>
+
+    <header class="bg-black/40 backdrop-blur-md py-4 px-4 sticky top-0 z-30">
+        <div class="max-w-lg mx-auto flex items-center">
+            <a href="pilih-game.html" class="text-xl mr-4"><i class="fa fa-arrow-left"></i></a>
+            <h1 class="text-xl font-bold">Halaman Pembayaran</h1>
+        </div>
+    </header>
+
+    <main class="max-w-lg mx-auto px-4 py-8">
+        <div class="bg-white/10 rounded-2xl p-6 border border-white/10 mb-6">
+            <h2 class="text-xl font-bold mb-4">📋 Ringkasan Pesanan</h2>
+            <div class="space-y-2 text-gray-300">
+                <p>Nama Game : <span class="font-bold text-white" id="game">-</span></p>
+                <p>Item : <span class="font-bold text-white" id="item">-</span></p>
+                <p>Total Bayar : <span class="font-bold text-green-400 text-lg" id="harga">Rp 0</span></p>
+            </div>
+        </div>
+
+        <div class="bg-white/10 rounded-2xl p-6 border border-white/10 mb-6">
+            <h3 class="text-lg font-bold mb-4">🆔 Masukkan ID Game</h3>
+            <input type="text" id="idgame" placeholder="Contoh: 12345678" class="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white">
+        </div>
+
+        <div class="bg-white/10 rounded-2xl p-6 border border-white/10 mb-6">
+            <h3 class="text-lg font-bold mb-4">💳 Pilih Cara Bayar</h3>
+            <div class="space-y-3">
+                <label class="flex items-center gap-3 p-3 border border-white/20 rounded-lg cursor-pointer hover:border-ungu-terang">
+                    <input type="radio" name="bayar" checked class="accent-ungu-terang">
+                    <img src="https://i.imgur.com/5Z7XQZL.png" class="w-8 h-8"><span>QRIS</span>
+                </label>
+                <label class="flex items-center gap-3 p-3 border border-white/20 rounded-lg cursor-pointer hover:border-ungu-terang">
+                    <input type="radio" name="bayar" class="accent-ungu-terang">
+                    <img src="https://i.imgur.com/hdT8ZSy.png" class="w-8 h-8"><span>DANA</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="bg-white/10 rounded-2xl p-6 border border-white/10 mb-6 text-center">
+            <h3 class="text-lg font-bold mb-4">📷 Scan QRIS</h3>
+            <div class="bg-white p-4 rounded-xl inline-block mb-4"><img src="https://i.imgur.com/8ZbX7yY.png" class="w-48 h-48 rounded-lg"></div>
+            <p class="text-sm text-gray-400 mb-2">Atau bayar ke:</p>
+            <p class="text-xl font-bold text-ungu-terang mb-1">0812-3456-7890</p>
+            <p class="text-sm text-gray-400">a.n. Xdnry777 Store</p>
+        </div>
+
+        <button onclick="konfirmasi()" class="w-full bg-ungu-utama hover:bg-ungu-terang py-4 rounded-xl text-xl font-bold">✅ Sudah Bayar, Konfirmasi</button>
+    </main>
+
+    <script>
+        document.getElementById('game').textContent=localStorage.getItem('gameDipilih');
+        document.getElementById('item').textContent=localStorage.getItem('itemDipilih');
+        const hrg=localStorage.getItem('totalHarga');
+        document.getElementById('harga').textContent='Rp '+Number(hrg).toLocaleString('id-ID');
+
+        function konfirmasi(){
+            const idg=document.getElementById('idgame').value||'-';
+            const met=document.querySelector('input[name=bayar]:checked').parentNode.textContent.trim();
+            localStorage.setItem('idGame',idg);
+            localStorage.setItem('metodeBayar',met);
+            window.location.href='struk.html';
+        }
+    </script>
+</body>
+</html>
