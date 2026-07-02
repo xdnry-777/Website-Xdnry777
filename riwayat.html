@@ -20,7 +20,6 @@
 <body class="text-white font-sans">
     <script>if(!localStorage.getItem('sudahLogin')){alert('⚠️ Silakan Login Dulu!');window.location.href='login.html';}</script>
 
-    <!-- SIDEBAR MENU -->
     <div id="sidebar" class="sidebar fixed top-0 left-0 h-full w-64 bg-black/95 z-50 p-5">
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-xl font-bold text-ungu-terang">Menu</h2>
@@ -30,15 +29,12 @@
             <a href="index.html" class="block py-2 hover:text-ungu-terang"><i class="fa fa-home mr-2"></i>Beranda</a>
             <a href="pilih-game.html" class="block py-2 hover:text-ungu-terang"><i class="fa fa-gamepad mr-2"></i>Pilih Game</a>
             <a href="riwayat.html" class="block py-2 hover:text-ungu-terang text-ungu-terang"><i class="fa fa-history mr-2"></i>Riwayat Pesanan</a>
-            <a href="bantuan.html" class="block py-2 hover:text-ungu-terang"><i class="fa fa-question-circle mr-2"></i>Pusat Bantuan</a>
-            <a href="syarat.html" class="block py-2 hover:text-ungu-terang"><i class="fa fa-file-text mr-2"></i>Syarat & Ketentuan</a>
             <hr class="border-white/10">
             <button onclick="keluar()" class="w-full text-left py-2 text-red-400 hover:text-red-300"><i class="fa fa-sign-out mr-2"></i>Keluar Akun</button>
         </div>
     </div>
     <div id="latar" onclick="tutupMenu()" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
 
-    <!-- HEADER -->
     <header class="bg-black/40 backdrop-blur-md py-4 px-4 sticky top-0 z-30">
         <div class="max-w-lg mx-auto flex justify-between items-center">
             <button onclick="bukaMenu()" class="text-2xl"><i class="fa fa-bars"></i></button>
@@ -63,8 +59,7 @@
 
         if(riwayat.length > 0){
             pesanKosong.classList.add('hidden');
-            // Urutkan dari yang TERBARU
-            riwayat.reverse().forEach((item, indeks) => {
+            riwayat.reverse().forEach(item => {
                 const kartu = document.createElement('div');
                 kartu.className = 'kartu-riwayat bg-white/10 rounded-xl p-5 border border-white/10';
                 kartu.innerHTML = `
@@ -73,20 +68,18 @@
                         <span class="text-xs px-2 py-1 rounded-full bg-green-500/20 text-green-400">Berhasil</span>
                     </div>
                     <p class="text-gray-300 text-sm">${item.item}</p>
-                    <p class="text-gray-500 text-xs mt-1">${item.tanggal}</p>
+                    <p class="text-gray-500 text-xs mt-1">${item.tanggal} • ${item.jam}</p>
                     <p class="text-xl font-bold text-green-400 mt-2">${item.total}</p>
-                    <p class="text-center text-sm text-ungu-terang mt-3">Klik untuk lihat detail struk →</p>
+                    <p class="text-center text-sm text-ungu-terang mt-3">Klik untuk lihat detail →</p>
                 `;
-                // Saat diklik, simpan data ini lalu buka halaman struk detail
                 kartu.onclick = () => {
                     localStorage.setItem('detailStruk', JSON.stringify(item));
-                    window.location.href = 'struk-detail.html';
+                    window.location.href='struk.html';
                 };
                 wadah.appendChild(kartu);
             });
         }
 
-        // Fungsi Menu
         function bukaMenu(){document.getElementById('sidebar').classList.add('buka');document.getElementById('latar').classList.remove('hidden');}
         function tutupMenu(){document.getElementById('sidebar').classList.remove('buka');document.getElementById('latar').classList.add('hidden');}
         function keluar(){if(confirm('Yakin keluar?')){localStorage.clear();window.location.href='login.html';}}
