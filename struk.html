@@ -3,90 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Struk - Xdnry777</title>
+    <title>Bukti Transaksi - Xdnry777</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <script>
         tailwind.config = {theme:{extend:{colors:{ungu:{utama:'#6B21A8',terang:'#A855F7'}}}}}
     </script>
-    <style>body{background:linear-gradient(135deg,#050505 0%,#1A102E 40%,#4C1D95 100%);min-height:100vh;}.kertas{background:#fff;color:#333;}</style>
+    <style>
+        body{background:linear-gradient(135deg,#050505 0%,#1A102E 40%,#4C1D95 100%);min-height:100vh;}
+        .kertas-struk{background:#ffffff;color:#1a1a1a;}
+        .garis-putus{border-bottom:2px dashed #ddd;}
+    </style>
 </head>
 <body class="text-white font-sans">
-    <script>if(!localStorage.getItem('sudahLogin')){alert('Silakan Login Dulu!');window.location.href='login.html';}</script>
+    <script>if(!localStorage.getItem('sudahLogin')){alert('⚠️ Silakan Login Dulu!');window.location.href='login.html';}</script>
 
     <header class="bg-black/40 backdrop-blur-md py-4 px-4 sticky top-0 z-30">
         <div class="max-w-lg mx-auto flex items-center">
-            <a href="index.html" class="text-xl mr-4"><i class="fa fa-home"></i></a>
-            <h1 class="text-xl font-bold">Bukti Pesanan</h1>
+            <a href="riwayat.html" class="text-xl mr-4"><i class="fa fa-arrow-left"></i></a>
+            <h1 class="text-xl font-bold">Bukti Transaksi</h1>
         </div>
     </header>
 
-    <main class="max-w-lg mx-auto px-4 py-8">
-        <div class="kertas rounded-2xl p-6 shadow-xl mb-6">
-            <div class="text-center border-b border-dashed pb-4 mb-4">
-                <h2 class="text-2xl font-bold text-ungu-utama">⚡ Xdnry777 Store</h2>
-                <p class="text-sm text-gray-500">Top Up Terpercaya</p>
-                <p class="text-xs mt-2">Tanggal: <span id="tgl"></span></p>
-                <p class="text-xs">No.Pesanan: <span class="font-bold" id="nopes"></span></p>
+    <main class="max-w-lg mx-auto px-4 py-6">
+        <div class="kertas-struk rounded-2xl p-6 shadow-2xl mb-6">
+            <!-- KOP TOKO -->
+            <div class="text-center mb-4">
+                <h2 class="text-2xl font-extrabold text-ungu-utama">⚡ Xdnry777 STORE</h2>
+                <p class="text-gray-500 text-sm">Layanan Top Up Game Terpercaya</p>
+                <p class="text-gray-400 text-xs mt-1">support@xdnry777.com | 0812-3456-7890</p>
             </div>
+
+            <div class="garis-putus my-3"></div>
+
+            <!-- DATA WAKTU & NO TRANSAKSI -->
+            <div class="flex justify-between text-sm mb-1">
+                <span class="text-gray-600">No. Transaksi</span>
+                <span class="font-bold" id="noTransaksi">-</span>
+            </div>
+            <div class="flex justify-between text-sm mb-1">
+                <span class="text-gray-600">Tanggal</span>
+                <span id="tgl">-</span>
+            </div>
+            <div class="flex justify-between text-sm mb-3">
+                <span class="text-gray-600">Jam</span>
+                <span id="jam">-</span>
+            </div>
+
+            <div class="garis-putus my-3"></div>
+
+            <!-- RINCIAN PESANAN -->
             <div class="space-y-2 text-sm">
-                <div class="flex justify-between"><span>Game</span><span class="font-bold" id="sgame"></span></div>
-                <div class="flex justify-between"><span>Item</span><span class="font-bold" id="sitem"></span></div>
-                <div class="flex justify-between"><span>ID Game</span><span class="font-bold" id="sid"></span></div>
-                <div class="flex justify-between"><span>Metode</span><span class="font-bold" id="smet"></span></div>
-                <hr class="border-dashed my-3">
-                <div class="flex justify-between text-lg font-bold text-ungu-utama"><span>TOTAL</span><span id="stotal"></span></div>
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Nama Game</span>
+                    <span class="font-semibold" id="game">-</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Item Top Up</span>
+                    <span class="font-semibold" id="item">-</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-600">ID Game / User</span>
+                    <span class="font-semibold" id="idgame">-</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Metode Bayar</span>
+                    <span class="font-semibold" id="metode">-</span>
+                </div>
             </div>
-            <div class="text-center mt-6 pt-4 border-t border-dashed">
-                <p class="text-green-600 font-bold">✅ BERHASIL DIPROSES</p>
+
+            <div class="garis-putus my-3"></div>
+
+            <!-- TOTAL BAYAR -->
+            <div class="flex justify-between text-xl font-bold text-ungu-utama">
+                <span>TOTAL BAYAR</span>
+                <span id="total">-</span>
+            </div>
+
+            <div class="garis-putus my-3"></div>
+
+            <!-- STATUS -->
+            <div class="text-center py-3 bg-green-50 rounded-xl border border-green-100">
+                <p class="text-green-700 font-bold text-lg">✅ TRANSAKSI BERHASIL</p>
+                <p class="text-green-600 text-sm mt-1">Item akan segera masuk ke akunmu</p>
+            </div>
+
+            <div class="text-center mt-4 text-gray-400 text-xs">
+                Terima kasih telah berbelanja di Xdnry777<br>
+                Simpan bukti ini sebagai arsip
             </div>
         </div>
 
-        <div class="space-y-3">
-            <button onclick="kirimEmail()" class="w-full bg-ungu-utama hover:bg-ungu-terang py-3 rounded-xl font-bold"><i class="fa fa-envelope mr-2"></i>Kirim ke Email</button>
-            <a href="index.html" class="block text-center bg-white/10 hover:bg-white/20 py-3 rounded-xl">Kembali ke Beranda</a>
+        <!-- TOMBOL AKSI -->
+        <div class="grid grid-cols-2 gap-3">
+            <button onclick="cetakStruk()" class="bg-white/10 hover:bg-white/20 py-3 rounded-xl font-bold">
+                <i class="fa fa-print mr-2"></i>Cetak
+            </button>
+            <a href="index.html" class="text-center bg-ungu-utama hover:bg-ungu-terang py-3 rounded-xl font-bold">
+                <i class="fa fa-home mr-2"></i>Beranda
+            </a>
         </div>
     </main>
 
     <script>
-        const game=localStorage.getItem('gameDipilih');
-        const item=localStorage.getItem('itemDipilih');
-        const hrg=localStorage.getItem('totalHarga');
-        const idg=localStorage.getItem('idGame');
-        const met=localStorage.getItem('metodeBayar');
-        const nopes='ORD'+Math.random().toString(36).substring(2,10).toUpperCase();
-        const tgl=new Date().toLocaleString('id-ID');
-        const total='Rp '+Number(hrg).toLocaleString('id-ID');
+        // Cek apakah dari riwayat atau dari pembayaran baru
+        let data;
+        if(localStorage.getItem('detailStruk')){
+            data = JSON.parse(localStorage.getItem('detailStruk'));
+            localStorage.removeItem('detailStruk'); // Hapus setelah dibuka
+        } else {
+            // Data dari pembayaran baru
+            const game = localStorage.getItem('gameDipilih');
+            const item = localStorage.getItem('itemDipilih');
+            const harga = localStorage.getItem('totalHarga');
+            const idg = localStorage.getItem('idGame') || '-';
+            const met = localStorage.getItem('metodeBayar');
+            const no = 'TRX-' + Math.random().toString(36).substring(2, 10).toUpperCase();
+            const sekarang = new Date();
+            const tgl = sekarang.toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'});
+            const jam = sekarang.toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'}) + ' WIB';
+            const total = 'Rp ' + Number(harga).toLocaleString('id-ID');
 
-        document.getElementById('tgl').textContent=tgl;
-        document.getElementById('nopes').textContent=nopes;
-        document.getElementById('sgame').textContent=game;
-        document.getElementById('sitem').textContent=item;
-        document.getElementById('sid').textContent=idg;
-        document.getElementById('smet').textContent=met;
-        document.getElementById('stotal').textContent=total;
+            data = {noPesanan:no, tanggal:tgl, jam:jam, game:game, item:item, idg:idg, met:met, total:total};
 
-        // SIMPAN KE RIWAYAT
-        let riwayat=JSON.parse(localStorage.getItem('riwayat')||'[]');
-        riwayat.push({nopes,tgl,game,item,idg,met,total});
-        localStorage.setItem('riwayat',JSON.stringify(riwayat));
+            // Simpan ke Riwayat
+            let riwayat = JSON.parse(localStorage.getItem('riwayat') || '[]');
+            riwayat.push(data);
+            localStorage.setItem('riwayat', JSON.stringify(riwayat));
+        }
 
-        function kirimEmail(){
-            const email='emailkamu@disini.com'; // GANTI EMAIL KAMU
-            const subjek='Struk '+nopes+' - Xdnry777';
-            const isi=`STRUK PEMBAYARAN
-No: ${nopes}
-Tanggal: ${tgl}
+        // Tampilkan semua data
+        document.getElementById('noTransaksi').textContent = data.noPesanan;
+        document.getElementById('tgl').textContent = data.tanggal;
+        document.getElementById('jam').textContent = data.jam;
+        document.getElementById('game').textContent = data.game;
+        document.getElementById('item').textContent = data.item;
+        document.getElementById('idgame').textContent = data.idg;
+        document.getElementById('metode').textContent = data.met;
+        document.getElementById('total').textContent = data.total;
 
-Game: ${game}
-Item: ${item}
-ID Game: ${idg}
-Metode: ${met}
-Total: ${total}
-
-Terima Kasih!`;
-            window.location.href=`mailto:${email}?subject=${encodeURIComponent(subjek)}&body=${encodeURIComponent(isi)}`;
-            alert('Aplikasi email terbuka, silakan kirim!');
+        function cetakStruk(){
+            window.print();
         }
     </script>
 </body>
