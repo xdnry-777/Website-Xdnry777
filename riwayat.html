@@ -13,8 +13,6 @@
         body{background:linear-gradient(135deg,#050505 0%,#1A102E 40%,#4C1D95 100%);min-height:100vh;}
         .sidebar{transform:translateX(-100%);transition:0.3s ease;}
         .sidebar.buka{transform:translateX(0);}
-        .kartu-riwayat:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(168,85,247,0.2);}
-        .kartu-riwayat{transition:all 0.3s ease;cursor:pointer;}
     </style>
 </head>
 <body class="text-white font-sans">
@@ -29,6 +27,8 @@
             <a href="index.html" class="block py-2 hover:text-ungu-terang"><i class="fa fa-home mr-2"></i>Beranda</a>
             <a href="pilih-game.html" class="block py-2 hover:text-ungu-terang"><i class="fa fa-gamepad mr-2"></i>Pilih Game</a>
             <a href="riwayat.html" class="block py-2 hover:text-ungu-terang text-ungu-terang"><i class="fa fa-history mr-2"></i>Riwayat Pesanan</a>
+            <a href="bantuan.html" class="block py-2 hover:text-ungu-terang"><i class="fa fa-question-circle mr-2"></i>Bantuan</a>
+            <a href="syarat-ketentuan.html" class="block py-2 hover:text-ungu-terang"><i class="fa fa-file-text mr-2"></i>Syarat & Ketentuan</a>
             <hr class="border-white/10">
             <button onclick="keluar()" class="w-full text-left py-2 text-red-400 hover:text-red-300"><i class="fa fa-sign-out mr-2"></i>Keluar Akun</button>
         </div>
@@ -43,41 +43,45 @@
         </div>
     </header>
 
-    <main class="max-w-lg mx-auto px-4 py-8">
-        <div id="daftar" class="space-y-4"></div>
-        <div id="kosong" class="text-center py-20 text-gray-400">
-            <i class="fa fa-history text-5xl mb-4"></i>
-            <p class="text-lg">Belum ada riwayat pesanan</p>
-            <a href="pilih-game.html" class="inline-block mt-4 text-ungu-terang hover:underline">Mulai Top Up Sekarang</a>
+    <main class="max-w-lg mx-auto px-4 py-6">
+        <div id="daftarRiwayat" class="space-y-3"></div>
+        <div id="kosong" class="text-center py-12 text-gray-400 hidden">
+            <i class="fa fa-folder-open text-4xl mb-3"></i>
+            <p>Belum ada riwayat transaksi</p>
         </div>
     </main>
 
     <script>
+        const wadah = document.getElementById('daftarRiwayat');
+        const kosong = document.getElementById('kosong');
         let riwayat = JSON.parse(localStorage.getItem('riwayat') || '[]');
-        const wadah = document.getElementById('daftar');
-        const pesanKosong = document.getElementById('kosong');
 
-        if(riwayat.length > 0){
-            pesanKosong.classList.add('hidden');
+        if(riwayat.length === 0){
+            kosong.classList.remove('hidden');
+        } else {
             riwayat.reverse().forEach(item => {
-                const kartu = document.createElement('div');
-                kartu.className = 'kartu-riwayat bg-white/10 rounded-xl p-5 border border-white/10';
-                kartu.innerHTML = `
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="font-bold text-lg">${item.game}</h3>
-                        <span class="text-xs px-2 py-1 rounded-full bg-green-500/20 text-green-400">Berhasil</span>
+                const kotak = document.createElement('div');
+                kotak.className = 'bg-white/10 rounded-xl p-4 border border-white/10 cursor-pointer hover:bg-white/15';
+                kotak.innerHTML = `
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-bold">${item.game}</span>
+                        <span class="text-green-400 text-sm">Berhasil</span>
                     </div>
-                    <p class="text-gray-300 text-sm">${item.item}</p>
-                    <p class="text-gray-500 text-xs mt-1">${item.tanggal} • ${item.jam}</p>
-                    <p class="text-xl font-bold text-green-400 mt-2">${item.total}</p>
-                    <p class="text-center text-sm text-ungu-terang mt-3">Klik untuk lihat detail →</p>
+                    <p class="text-sm text-gray-300">${item.item} • ID: ${item.idg}</p>
+                    <div class="flex justify-between mt-2 text-sm">
+                        <span class="text-gray-400">${item.tanggal} ${item.jam}</span>
+                        <span class="font-bold text-ungu-terang">${item.total}</span>
+                    </div>
                 `;
-                kartu.onclick = () => {
-                    localStorage.setItem('detailStruk', JSON.stringify(item));
-                    window.location.href='struk.html';
-                };
-                wadah.appendChild(kartu);
+                kotak.onclick = () => bukaDetail(item);
+                wadah.appendChild(kotak);
             });
+        }
+
+        function bukaDetail(data){
+            localStorage.setItem('detailStruk', JSON.stringify(data));
+            localStorage.removeItem('sudahLihatStruk');
+            window.location.href='struk.html';
         }
 
         function bukaMenu(){document.getElementById('sidebar').classList.add('buka');document.getElementById('latar').classList.remove('hidden');}
