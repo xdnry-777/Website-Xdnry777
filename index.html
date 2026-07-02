@@ -7,80 +7,36 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        ungu: { utama:'#6B21A8', terang:'#A855F7', gelap:'#3B0764' }
-                    }
-                }
-            }
-        }
+        tailwind.config = {theme:{extend:{colors:{ungu:{utama:'#6B21A8',terang:'#A855F7'}}}}}
     </script>
     <style>
-        body {
-            background: linear-gradient(180deg, #050505 0%, #1A102E 35%, #4C1D95 75%, #6B21A8 100%);
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        .bintang {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: kedip 2s infinite ease-in-out;
-        }
-        @keyframes kedip {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-
-        .tombol-utama {
-            background: linear-gradient(135deg, #9333EA 0%, #6B21A8 100%);
-            box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4);
-            transition: all 0.3s ease;
-        }
-        .tombol-utama:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(168, 85, 247, 0.6);
-        }
-
-        .logo-bisnis {
-            filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.7));
-        }
+        body {background: linear-gradient(180deg, #050505 0%, #1A102E 35%, #4C1D95 75%, #6B21A8 100%); min-height:100vh; position:relative; overflow-x:hidden;}
+        .bintang {position:absolute; background:white; border-radius:50%; animation:kedip 2s infinite ease-in-out;}
+        @keyframes kedip {0%,100%{opacity:0.3;}50%{opacity:1;}}
+        .tombol-utama {background:linear-gradient(135deg,#9333EA 0%,#6B21A8 100%); box-shadow:0 8px 25px rgba(168,85,247,0.4); transition:all 0.3s ease;}
+        .tombol-utama:hover {transform:translateY(-3px); box-shadow:0 12px 35px rgba(168,85,247,0.6);}
+        .logo-bisnis {filter:drop-shadow(0 0 15px rgba(168,85,247,0.7));}
     </style>
 </head>
 <body class="text-white font-sans">
+    <div class="bintang" style="width:3px;height:3px;top:15%;left:10%;animation-delay:0s;"></div>
+    <div class="bintang" style="width:2px;height:2px;top:25%;right:15%;animation-delay:0.5s;"></div>
+    <div class="bintang" style="width:4px;height:4px;top:60%;left:8%;animation-delay:1s;"></div>
+    <div class="bintang" style="width:2px;height:2px;top:75%;right:10%;animation-delay:1.5s;"></div>
+    <div class="bintang" style="width:3px;height:3px;top:40%;left:90%;animation-delay:0.8s;"></div>
 
-    <div class="bintang" style="width: 3px; height: 3px; top: 15%; left: 10%; animation-delay: 0s;"></div>
-    <div class="bintang" style="width: 2px; height: 2px; top: 25%; right: 15%; animation-delay: 0.5s;"></div>
-    <div class="bintang" style="width: 4px; height: 4px; top: 60%; left: 8%; animation-delay: 1s;"></div>
-    <div class="bintang" style="width: 2px; height: 2px; top: 75%; right: 10%; animation-delay: 1.5s;"></div>
-    <div class="bintang" style="width: 3px; height: 3px; top: 40%; left: 90%; animation-delay: 0.8s;"></div>
-
-    <!-- HEADER: HANYA TOMBOL KELUAR, TULISAN XDNRY777 DIHAPUS -->
     <header class="bg-black/20 backdrop-blur-sm py-4 px-4 sticky top-0 z-30">
         <div class="max-w-xl mx-auto flex justify-end items-center">
             <div class="flex items-center gap-3">
                 <span id="namaUser" class="text-sm text-gray-300"></span>
-                <button onclick="keluarAkun()" class="bg-red-600 hover:bg-red-700 px-4 py-1.5 rounded-full text-sm font-medium shadow-lg">
-                    Keluar
-                </button>
+                <button onclick="keluarAkun()" class="bg-red-600 hover:bg-red-700 px-4 py-1.5 rounded-full text-sm font-medium shadow-lg">Keluar</button>
             </div>
         </div>
     </header>
 
     <main class="max-w-xl mx-auto px-6 py-8 text-center relative z-10">
-
-        <!-- LOGO BISNIS KAMU -->
         <div class="mb-8 mt-4">
-            <img 
-                src="https://LINK-LOGO-KAMU-DI-SINI" 
-                alt="Logo Xdnry777" 
-                class="logo-bisnis mx-auto h-28 w-auto rounded-xl"
-                onerror="this.style.display='none'"
-            >
+            <img src="https://LINK-LOGO-KAMU-DI-SINI" alt="Logo Xdnry777" class="logo-bisnis mx-auto h-28 w-auto rounded-xl" onerror="this.style.display='none'">
             <h2 class="text-2xl font-bold text-ungu-terang mt-3">Xdnry777 Store</h2>
         </div>
 
@@ -88,44 +44,24 @@
             Top Up Game <br>
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-ungu-terang to-pink-400">Tercepat & Aman</span>
         </h1>
-
-        <p class="text-gray-300 text-lg mb-10 max-w-md mx-auto">
-            Harga Paling Murah ✅ Proses Cepat ⚡ Terpercaya Sejak Awal ⭐
-        </p>
+        <p class="text-gray-300 text-lg mb-10 max-w-md mx-auto">Harga Paling Murah ✅ Proses Cepat ⚡ Terpercaya Sejak Awal ⭐</p>
 
         <button onclick="window.location.href='pilih-game.html'" class="tombol-utama px-10 py-4 rounded-2xl text-xl font-bold inline-flex items-center gap-3">
-            Mulai Top Up
-            <i class="fa fa-arrow-right"></i>
+            Mulai Top Up <i class="fa fa-arrow-right"></i>
         </button>
 
         <div class="grid grid-cols-3 gap-4 mt-16">
-            <div class="bg-white/5 rounded-xl p-4 border border-white/10">
-                <i class="fa fa-bolt text-yellow-400 text-2xl mb-2"></i>
-                <p class="text-xs">Proses Detik</p>
-            </div>
-            <div class="bg-white/5 rounded-xl p-4 border border-white/10">
-                <i class="fa fa-shield text-blue-400 text-2xl mb-2"></i>
-                <p class="text-xs">100% Aman</p>
-            </div>
-            <div class="bg-white/5 rounded-xl p-4 border border-white/10">
-                <i class="fa fa-tag text-green-400 text-2xl mb-2"></i>
-                <p class="text-xs">Harga Termurah</p>
-            </div>
+            <div class="bg-white/5 rounded-xl p-4 border border-white/10"><i class="fa fa-bolt text-yellow-400 text-2xl mb-2"></i><p class="text-xs">Proses Detik</p></div>
+            <div class="bg-white/5 rounded-xl p-4 border border-white/10"><i class="fa fa-shield text-blue-400 text-2xl mb-2"></i><p class="text-xs">100% Aman</p></div>
+            <div class="bg-white/5 rounded-xl p-4 border border-white/10"><i class="fa fa-tag text-green-400 text-2xl mb-2"></i><p class="text-xs">Harga Termurah</p></div>
         </div>
-
     </main>
 
     <script>
+        if(!localStorage.getItem('sudahLogin')){alert('⚠️ Silakan Login Dulu!');window.location.href='login.html';}
         const nama = localStorage.getItem('namaPengguna') || 'Pengguna';
         document.getElementById('namaUser').textContent = 'Halo, ' + nama;
-
-        function keluarAkun(){
-            if(confirm('Yakin ingin keluar dari akun?')){
-                localStorage.removeItem('namaPengguna');
-                localStorage.removeItem('sudahLogin');
-                window.location.href = 'login.html';
-            }
-        }
+        function keluarAkun(){if(confirm('Yakin ingin keluar?')){localStorage.clear();window.location.href='login.html';}}
     </script>
 </body>
 </html>
