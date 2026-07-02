@@ -5,36 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Xdnry777</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <script>
         tailwind.config = {theme:{extend:{colors:{ungu:{utama:'#6B21A8',terang:'#A855F7'}}}}}
     </script>
-    <style>body{background:linear-gradient(135deg,#050505 0%,#1A102E 40%,#4C1D95 100%);min-height:100vh;}</style>
+    <style>
+        body{background:linear-gradient(180deg,#050505 0%,#1A102E 40%,#4C1D95 100%);min-height:100vh;}
+    </style>
 </head>
-<body class="text-white font-sans flex items-center justify-center p-4">
+<body class="text-white font-sans flex items-center justify-center px-4">
     <div class="w-full max-w-md">
         <div class="text-center mb-8">
-            <h1 class="text-3xl font-bold text-ungu-terang">⚡ Xdnry777</h1>
-            <p class="text-gray-400 mt-2">Silakan Masuk</p>
+            <h1 class="text-4xl font-extrabold text-ungu-terang">⚡ Xdnry777</h1>
+            <p class="text-gray-300 mt-2">Masuk untuk mulai top up</p>
         </div>
-        <div class="bg-white/10 rounded-2xl p-6 border border-white/10">
-            <div class="space-y-4">
-                <input type="text" id="user" placeholder="Nama Pengguna" class="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white">
-                <input type="password" id="pass" placeholder="Kata Sandi" class="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white">
-                <button onclick="masuk()" class="w-full bg-ungu-utama hover:bg-ungu-terang py-3 rounded-lg font-bold">Masuk</button>
-                <p class="text-center text-sm text-gray-400">Belum punya akun? <a href="daftar.html" class="text-ungu-terang">Daftar</a></p>
-            </div>
+
+        <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10">
+            <label class="block mb-2 font-medium">Nama Kamu</label>
+            <input type="text" id="nama" placeholder="Masukkan nama kamu" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 focus:outline-none focus:ring-2 focus:ring-ungu-terang mb-4" required>
+
+            <button onclick="login()" class="w-full bg-ungu-utama hover:bg-ungu-terang py-3 rounded-xl font-bold text-lg transition-all">
+                Masuk
+            </button>
         </div>
     </div>
+
     <script>
-        function masuk(){
-            const u=document.getElementById('user').value;
-            const p=document.getElementById('pass').value;
-            if(!u||!p)return alert('Lengkapi data!');
-            localStorage.setItem('namaPengguna',u);
-            localStorage.setItem('sudahLogin','ya');
-            alert('Berhasil masuk!');
-            window.location.href='index.html';
+        function login(){
+            const nama = document.getElementById('nama').value.trim();
+            if(nama.length < 2){
+                alert('⚠️ Nama minimal 2 huruf!');
+                return;
+            }
+            localStorage.setItem('namaPengguna', nama);
+            localStorage.setItem('sudahLogin', 'ya');
+            window.location.href = 'index.html';
         }
     </script>
 </body>
