@@ -29,10 +29,8 @@
     <main class="max-w-lg mx-auto px-4 py-6">
         <div class="kertas-struk rounded-2xl p-6 shadow-2xl mb-6">
             <div class="text-center mb-4">
-                <img src="https://LINK-LOGO-KAMU-DI-SINI" alt="Logo" class="mx-auto h-20 mb-2">
                 <h2 class="text-2xl font-extrabold text-ungu-utama">⚡ Xdnry777 STORE</h2>
                 <p class="text-gray-500 text-sm">Layanan Top Up Game Terpercaya</p>
-                <p class="text-gray-400 text-xs mt-1">xdnry777@gmail.com</p>
             </div>
 
             <div class="garis-putus my-3"></div>
@@ -71,7 +69,7 @@
             <div class="text-center py-3 bg-green-50 rounded-xl border border-green-100">
                 <p class="text-green-700 font-bold text-lg">✅ TRANSAKSI BERHASIL</p>
                 <p class="text-green-600 text-sm mt-1">Item akan segera masuk ke akunmu</p>
-                <p id="statusEmail" class="text-blue-600 text-xs mt-2">📨 Sedang mengirim struk ke email...</p>
+                <p id="statusEmail" class="text-blue-600 text-xs mt-2"></p>
             </div>
 
             <div class="text-center mt-4 text-gray-400 text-xs">
@@ -81,29 +79,26 @@
 
         <div class="grid grid-cols-2 gap-3">
             <button onclick="cetakStruk()" class="bg-white/10 hover:bg-white/20 py-3 rounded-xl font-bold"><i class="fa fa-print mr-2"></i>Cetak</button>
-            <a href="riwayat.html" class="text-center bg-ungu-utama hover:bg-ungu-terang py-3 rounded-xl font-bold"><i class="fa fa-arrow-left mr-2"></i>Kembali</a>
+            <a href="riwayat.html" class="text-center bg-ungu-utama hover:bg-ungu-terang py-3 rounded-xl font-bold"><i class="fa fa-list mr-2"></i>Riwayat</a>
         </div>
     </main>
 
     <script>
-        // ✅ DATA KAMU SUDAH LENGKAP TERISI!
         const SERVICE_ID = "service_ufv9bxq";
         const TEMPLATE_ID = "template_z4gct3d";
         const PUBLIC_KEY = "ohkoG7R1M6hD-xPFw";
-        const EMAIL_PEMILIK = "xdnry777@gmail.com";
-
         emailjs.init(PUBLIC_KEY);
 
         let data;
-        if(localStorage.getItem('detailStruk')){
-            data = JSON.parse(localStorage.getItem('detailStruk'));
-            localStorage.removeItem('detailStruk');
-        } else {
+        const baruTransaksi = !localStorage.getItem('sudahLihatStruk');
+
+        if(baruTransaksi){
             const game = localStorage.getItem('gameDipilih') || '-';
             const item = localStorage.getItem('itemDipilih') || '-';
             const harga = localStorage.getItem('totalHarga') || 0;
             const idg = localStorage.getItem('idGame') || '-';
             const met = localStorage.getItem('metodeBayar') || '-';
+            const emailUser = localStorage.getItem('emailUser') || 'xdnry777@gmail.com';
 
             const no = 'TRX-' + Math.random().toString(36).substring(2, 10).toUpperCase();
             const sekarang = new Date();
@@ -116,39 +111,43 @@
             let riwayat = JSON.parse(localStorage.getItem('riwayat') || '[]');
             riwayat.push(data);
             localStorage.setItem('riwayat', JSON.stringify(riwayat));
+            localStorage.setItem('sudahLihatStruk', 'YA');
+
+            // KIRIM EMAIL HANYA JIKA TRANSAKSI BARU
+            document.getElementById('statusEmail').textContent = "📨 Sedang mengirim struk...";
+            const param = {
+                to_email: emailUser,
+                noPesanan: data.noPesanan,
+                tanggal: data.tanggal,
+                jam: data.jam,
+                game: data.game,
+                item: data.item,
+                idg: data.idg,
+                metode: data.metode,
+                total: data.total
+            };
+
+            emailjs.send(SERVICE_ID, TEMPLATE_ID, param)
+            .then(()=>{
+                document.getElementById('statusEmail').textContent = "✅ Struk terkirim ke email kamu!";
+            })
+            .catch(err=>{
+                document.getElementById('statusEmail').textContent = "⚠️ Gagal kirim: " + err.text;
+            });
+        } else {
+            // BUKA DARI RIWAYAT: AMBIL DATA SAJA, TIDAK KIRIM EMAIL
+            data = JSON.parse(localStorage.getItem('detailStruk') || '{}');
+            document.getElementById('statusEmail').textContent = "📄 Riwayat Transaksi";
         }
 
-        document.getElementById('noTransaksi').textContent = data.noPesanan;
-        document.getElementById('tgl').textContent = data.tanggal;
-        document.getElementById('jam').textContent = data.jam;
-        document.getElementById('game').textContent = data.game;
-        document.getElementById('item').textContent = data.item;
-        document.getElementById('idgame').textContent = data.idg;
-        document.getElementById('metode').textContent = data.metode;
-        document.getElementById('total').textContent = data.total;
-
-        // Kirim Email Otomatis
-        const param = {
-            ke_email: EMAIL_PEMILIK,
-            noPesanan: data.noPesanan,
-            tanggal: data.tanggal,
-            jam: data.jam,
-            game: data.game,
-            item: data.item,
-            idg: data.idg,
-            metode: data.metode,
-            total: data.total
-        };
-
-        emailjs.send(SERVICE_ID, TEMPLATE_ID, param)
-        .then(()=>{
-            document.getElementById('statusEmail').textContent = "✅ Struk terkirim ke email!";
-            document.getElementById('statusEmail').className = "text-green-600 text-xs mt-2";
-        })
-        .catch(err=>{
-            document.getElementById('statusEmail').textContent = "⚠️ Gagal kirim: " + err.text;
-            document.getElementById('statusEmail').className = "text-red-600 text-xs mt-2";
-        });
+        document.getElementById('noTransaksi').textContent = data.noPesanan || '-';
+        document.getElementById('tgl').textContent = data.tanggal || '-';
+        document.getElementById('jam').textContent = data.jam || '-';
+        document.getElementById('game').textContent = data.game || '-';
+        document.getElementById('item').textContent = data.item || '-';
+        document.getElementById('idgame').textContent = data.idg || '-';
+        document.getElementById('metode').textContent = data.metode || '-';
+        document.getElementById('total').textContent = data.total || '-';
 
         function cetakStruk(){window.print();}
     </script>
