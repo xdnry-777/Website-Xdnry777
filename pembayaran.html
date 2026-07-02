@@ -9,69 +9,79 @@
     <script>
         tailwind.config = {theme:{extend:{colors:{ungu:{utama:'#6B21A8',terang:'#A855F7'}}}}}
     </script>
-    <style>body{background:linear-gradient(135deg,#050505 0%,#1A102E 40%,#4C1D95 100%);min-height:100vh;}</style>
+    <style>
+        body{background:linear-gradient(135deg,#050505 0%,#1A102E 40%,#4C1D95 100%);min-height:100vh;}
+        .metode-bayar:hover{border-color:#A855F7;background:rgba(168,85,247,0.1);}
+        .metode-bayar{transition:all 0.2s ease;cursor:pointer;}
+        .terpilih{border-color:#A855F7 !important;background:rgba(168,85,247,0.15) !important;}
+    </style>
 </head>
 <body class="text-white font-sans">
-    <script>if(!localStorage.getItem('sudahLogin')){alert('Silakan Login Dulu!');window.location.href='login.html';}</script>
+    <script>if(!localStorage.getItem('sudahLogin')){alert('⚠️ Silakan Login Dulu!');window.location.href='login.html';}</script>
 
     <header class="bg-black/40 backdrop-blur-md py-4 px-4 sticky top-0 z-30">
-        <div class="max-w-lg mx-auto flex items-center">
-            <a href="pilih-game.html" class="text-xl mr-4"><i class="fa fa-arrow-left"></i></a>
-            <h1 class="text-xl font-bold">Halaman Pembayaran</h1>
+        <div class="max-w-lg mx-auto flex justify-between items-center">
+            <a href="pilih-game.html" class="text-xl"><i class="fa fa-arrow-left"></i></a>
+            <h1 class="text-xl font-bold">Konfirmasi Pembayaran</h1>
+            <div></div>
         </div>
     </header>
 
-    <main class="max-w-lg mx-auto px-4 py-8">
-        <div class="bg-white/10 rounded-2xl p-6 border border-white/10 mb-6">
-            <h2 class="text-xl font-bold mb-4">📋 Ringkasan Pesanan</h2>
-            <div class="space-y-2 text-gray-300">
-                <p>Nama Game : <span class="font-bold text-white" id="game">-</span></p>
-                <p>Item : <span class="font-bold text-white" id="item">-</span></p>
-                <p>Total Bayar : <span class="font-bold text-green-400 text-lg" id="harga">Rp 0</span></p>
+    <main class="max-w-lg mx-auto px-4 py-6">
+        <div class="bg-white/10 rounded-xl p-5 border border-white/10 mb-6">
+            <h3 class="font-bold text-lg mb-3">Rincian Pesanan</h3>
+            <div class="space-y-2 text-sm">
+                <div class="flex justify-between"><span class="text-gray-400">Game</span><span id="game">-</span></div>
+                <div class="flex justify-between"><span class="text-gray-400">Item</span><span id="item">-</span></div>
+                <div class="flex justify-between"><span class="text-gray-400">Total Bayar</span><span id="total" class="text-green-400 font-bold">-</span></div>
             </div>
         </div>
 
-        <div class="bg-white/10 rounded-2xl p-6 border border-white/10 mb-6">
-            <h3 class="text-lg font-bold mb-4">🆔 Masukkan ID Game</h3>
-            <input type="text" id="idgame" placeholder="Contoh: 12345678" class="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white">
+        <!-- ✅ KOLOM ID GAME DIPINDAH KE SINI -->
+        <div class="mb-6">
+            <label class="block mb-2 font-medium">🆔 Masukkan ID Game</label>
+            <input type="text" id="idGame" placeholder="Contoh: 12345678" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 focus:outline-none focus:ring-2 focus:ring-ungu-terang">
         </div>
 
-        <div class="bg-white/10 rounded-2xl p-6 border border-white/10 mb-6">
-            <h3 class="text-lg font-bold mb-4">💳 Pilih Cara Bayar</h3>
-            <div class="space-y-3">
-                <label class="flex items-center gap-3 p-3 border border-white/20 rounded-lg cursor-pointer hover:border-ungu-terang">
-                    <input type="radio" name="bayar" checked class="accent-ungu-terang">
-                    <img src="https://i.imgur.com/5Z7XQZL.png" class="w-8 h-8"><span>QRIS</span>
-                </label>
-                <label class="flex items-center gap-3 p-3 border border-white/20 rounded-lg cursor-pointer hover:border-ungu-terang">
-                    <input type="radio" name="bayar" class="accent-ungu-terang">
-                    <img src="https://i.imgur.com/hdT8ZSy.png" class="w-8 h-8"><span>DANA</span>
-                </label>
+        <h3 class="font-bold text-lg mb-3">Pilih Metode Pembayaran</h3>
+        <div class="space-y-3 mb-8">
+            <div class="metode-bayar border border-white/20 rounded-xl p-4 flex items-center gap-3" onclick="pilihMetode(this,'QRIS')">
+                <span class="text-2xl">📱</span>
+                <span class="font-medium">QRIS</span>
+            </div>
+            <div class="metode-bayar border border-white/20 rounded-xl p-4 flex items-center gap-3" onclick="pilihMetode(this,'DANA')">
+                <span class="text-2xl">💳</span>
+                <span class="font-medium">DANA</span>
+            </div>
+            <div class="metode-bayar border border-white/20 rounded-xl p-4 flex items-center gap-3" onclick="pilihMetode(this,'Transfer Bank')">
+                <span class="text-2xl">🏦</span>
+                <span class="font-medium">Transfer Bank BCA</span>
             </div>
         </div>
 
-        <div class="bg-white/10 rounded-2xl p-6 border border-white/10 mb-6 text-center">
-            <h3 class="text-lg font-bold mb-4">📷 Scan QRIS</h3>
-            <div class="bg-white p-4 rounded-xl inline-block mb-4"><img src="https://i.imgur.com/8ZbX7yY.png" class="w-48 h-48 rounded-lg"></div>
-            <p class="text-sm text-gray-400 mb-2">Atau bayar ke:</p>
-            <p class="text-xl font-bold text-ungu-terang mb-1">0812-3456-7890</p>
-            <p class="text-sm text-gray-400">a.n. Xdnry777 Store</p>
-        </div>
-
-        <button onclick="konfirmasi()" class="w-full bg-ungu-utama hover:bg-ungu-terang py-4 rounded-xl text-xl font-bold">✅ Sudah Bayar, Konfirmasi</button>
+        <button onclick="bayar()" class="w-full bg-ungu-utama hover:bg-ungu-terang py-4 rounded-xl font-bold text-xl">
+            Lanjut Bayar
+        </button>
     </main>
 
     <script>
-        document.getElementById('game').textContent=localStorage.getItem('gameDipilih');
-        document.getElementById('item').textContent=localStorage.getItem('itemDipilih');
-        const hrg=localStorage.getItem('totalHarga');
-        document.getElementById('harga').textContent='Rp '+Number(hrg).toLocaleString('id-ID');
+        document.getElementById('game').textContent = localStorage.getItem('gameDipilih');
+        document.getElementById('item').textContent = localStorage.getItem('itemDipilih');
+        document.getElementById('total').textContent = 'Rp ' + Number(localStorage.getItem('totalHarga')).toLocaleString('id-ID');
 
-        function konfirmasi(){
-            const idg=document.getElementById('idgame').value||'-';
-            const met=document.querySelector('input[name=bayar]:checked').parentNode.textContent.trim();
-            localStorage.setItem('idGame',idg);
-            localStorage.setItem('metodeBayar',met);
+        let metodeTerpilih = null;
+        function pilihMetode(el, nama){
+            document.querySelectorAll('.metode-bayar').forEach(x=>x.classList.remove('terpilih'));
+            el.classList.add('terpilih');
+            metodeTerpilih = nama;
+        }
+
+        function bayar(){
+            const id = document.getElementById('idGame').value.trim();
+            if(id.length < 3){alert('⚠️ Masukkan ID Game yang benar!');return;}
+            if(!metodeTerpilih){alert('⚠️ Pilih dulu metode pembayarannya!');return;}
+            localStorage.setItem('idGame', id);
+            localStorage.setItem('metodeBayar', metodeTerpilih);
             window.location.href='struk.html';
         }
     </script>
