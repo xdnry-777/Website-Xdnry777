@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pilih Game - Xdnry777</title>
+    <title>Top Up - Xdnry777</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <script>
@@ -13,6 +13,9 @@
         body{background:linear-gradient(135deg,#050505 0%,#1A102E 40%,#4C1D95 100%);min-height:100vh;}
         .kartu-game:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(168,85,247,0.3);}
         .kartu-game{transition:all 0.3s ease;cursor:pointer;}
+        .item-pilihan:hover{transform:scale(1.03);box-shadow:0 8px 25px rgba(168,85,247,0.25);}
+        .item-pilihan{transition:all 0.25s ease;cursor:pointer;}
+        .game-terpilih{border-color: #A855F7 !important; background: rgba(168,85,247,0.15) !important;}
     </style>
 </head>
 <body class="text-white font-sans">
@@ -21,40 +24,92 @@
     <header class="bg-black/40 backdrop-blur-md py-4 px-4 sticky top-0 z-30">
         <div class="max-w-lg mx-auto flex justify-between items-center">
             <a href="index.html" class="text-xl"><i class="fa fa-arrow-left"></i></a>
-            <h1 class="text-xl font-bold">Pilih Game</h1>
+            <h1 class="text-xl font-bold">Pilih Game & Item</h1>
             <div></div>
         </div>
     </header>
 
     <main class="max-w-lg mx-auto px-4 py-6">
-        <div class="grid grid-cols-2 gap-4">
-            <div class="kartu-game bg-white/10 rounded-xl p-4 text-center border border-white/10" onclick="pilihGame('Mobile Legends')">
+        <h2 class="font-bold text-lg mb-3">🎮 Pilih Game</h2>
+        <div class="grid grid-cols-2 gap-4 mb-8" id="daftarGame">
+            <div class="kartu-game bg-white/10 rounded-xl p-4 text-center border border-white/10" onclick="pilihGame(this, 'Mobile Legends')">
                 <div class="text-4xl mb-2">🦅</div>
                 <h3 class="font-bold">Mobile Legends</h3>
                 <p class="text-xs text-gray-400 mt-1">Diamond</p>
             </div>
-            <div class="kartu-game bg-white/10 rounded-xl p-4 text-center border border-white/10" onclick="pilihGame('Free Fire')">
+            <div class="kartu-game bg-white/10 rounded-xl p-4 text-center border border-white/10" onclick="pilihGame(this, 'Free Fire')">
                 <div class="text-4xl mb-2">🔥</div>
                 <h3 class="font-bold">Free Fire</h3>
                 <p class="text-xs text-gray-400 mt-1">Diamond</p>
             </div>
-            <div class="kartu-game bg-white/10 rounded-xl p-4 text-center border border-white/10" onclick="pilihGame('PUBG Mobile')">
+            <div class="kartu-game bg-white/10 rounded-xl p-4 text-center border border-white/10" onclick="pilihGame(this, 'PUBG Mobile')">
                 <div class="text-4xl mb-2">🔫</div>
                 <h3 class="font-bold">PUBG Mobile</h3>
                 <p class="text-xs text-gray-400 mt-1">UC</p>
             </div>
-            <div class="kartu-game bg-white/10 rounded-xl p-4 text-center border border-white/10" onclick="pilihGame('Genshin Impact')">
+            <div class="kartu-game bg-white/10 rounded-xl p-4 text-center border border-white/10" onclick="pilihGame(this, 'Genshin Impact')">
                 <div class="text-4xl mb-2">⚡</div>
                 <h3 class="font-bold">Genshin Impact</h3>
-                <p class="text-xs text-gray-400 mt-1">Genesis Crystal</p>
+                <p class="text-xs text-gray-400 mt-1">Kristal</p>
             </div>
+        </div>
+
+        <div id="bagianItem" class="hidden">
+            <h2 class="font-bold text-lg mb-3">✨ Pilih Jumlah Item</h2>
+            <div class="grid grid-cols-2 gap-3" id="daftarItem"></div>
         </div>
     </main>
 
     <script>
-        function pilihGame(namaGame){
+        const dataItem = {
+            'Mobile Legends': [
+                {nama:'56 Diamond', harga:16000},
+                {nama:'112 Diamond', harga:32000},
+                {nama:'560 Diamond', harga:155000},
+                {nama:'1120 Diamond', harga:305000}
+            ],
+            'Free Fire': [
+                {nama:'70 Diamond', harga:10000},
+                {nama:'140 Diamond', harga:20000},
+                {nama:'720 Diamond', harga:95000},
+                {nama:'1440 Diamond', harga:190000}
+            ],
+            'PUBG Mobile': [
+                {nama:'60 UC', harga:15000},
+                {nama:'300 UC', harga:75000},
+                {nama:'600 UC', harga:145000},
+                {nama:'1500 UC', harga:350000}
+            ],
+            'Genshin Impact': [
+                {nama:'60 Kristal', harga:12000},
+                {nama:'300 Kristal', harga:60000},
+                {nama:'980 Kristal', harga:195000},
+                {nama:'1980 Kristal', harga:390000}
+            ]
+        };
+
+        function pilihGame(el, namaGame){
+            document.querySelectorAll('.kartu-game').forEach(x => x.classList.remove('game-terpilih'));
+            el.classList.add('game-terpilih');
             localStorage.setItem('gameDipilih', namaGame);
-            window.location.href='pilih-item.html';
+
+            document.getElementById('bagianItem').classList.remove('hidden');
+            const wadah = document.getElementById('daftarItem');
+            wadah.innerHTML = '';
+
+            dataItem[namaGame].forEach(item => {
+                const kotak = document.createElement('div');
+                kotak.className = 'item-pilihan bg-white/10 rounded-xl p-4 border border-white/10 text-center';
+                kotak.innerHTML = `<h4 class="font-bold">${item.nama}</h4><p class="text-green-400 font-bold mt-2">Rp ${item.harga.toLocaleString('id-ID')}</p>`;
+                kotak.onclick = () => lanjutPembayaran(item.nama, item.harga);
+                wadah.appendChild(kotak);
+            });
+        }
+
+        function lanjutPembayaran(namaItem, harga){
+            localStorage.setItem('itemDipilih', namaItem);
+            localStorage.setItem('totalHarga', harga);
+            window.location.href='pembayaran.html';
         }
     </script>
 </body>
