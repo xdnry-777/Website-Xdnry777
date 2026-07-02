@@ -7,96 +7,34 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        ungu: { utama:'#6B21A8', terang:'#A855F7' }
-                    }
-                }
-            }
-        }
+        tailwind.config = {theme:{extend:{colors:{ungu:{utama:'#6B21A8',terang:'#A855F7'}}}}}
     </script>
     <style>
         body{background:linear-gradient(135deg,#050505 0%,#1A102E 40%,#4C1D95 100%);min-height:100vh;}
-        .sidebar{transform:translateX(-100%);transition:0.3s ease;}
-        .sidebar.buka{transform:translateX(0);}
     </style>
 </head>
 <body class="text-white font-sans">
-    <script>
-        if(!localStorage.getItem('sudahLogin')){
-            alert('⚠️ Silakan Login Dulu!');
-            window.location.href='login.html';
-        }
-    </script>
+    <script>if(!localStorage.getItem('sudahLogin')){alert('⚠️ Silakan Login Dulu!');window.location.href='login.html';}</script>
 
-    <!-- SIDEBAR MENU LENGKAP -->
-    <div id="sidebar" class="sidebar fixed top-0 left-0 h-full w-64 bg-black/95 z-50 p-5">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-xl font-bold text-ungu-terang">Menu</h2>
-            <button onclick="tutupMenu()" class="text-2xl">&times;</button>
-        </div>
-        <div class="space-y-4 text-lg">
-            <a href="index.html" class="block py-2 hover:text-ungu-terang"><i class="fa fa-home mr-2"></i>Beranda</a>
-            <a href="pilih-game.html" class="block py-2 hover:text-ungu-terang"><i class="fa fa-gamepad mr-2"></i>Pilih Game</a>
-            <a href="riwayat.html" class="block py-2 hover:text-ungu-terang"><i class="fa fa-history mr-2"></i>Riwayat Pesanan</a>
-            <a href="bantuan.html" class="block py-2 hover:text-ungu-terang"><i class="fa fa-question-circle mr-2"></i>Pusat Bantuan</a>
-            <a href="syarat.html" class="block py-2 hover:text-ungu-terang text-ungu-terang"><i class="fa fa-file-text mr-2"></i>Syarat & Ketentuan</a>
-            <hr class="border-white/10">
-            <button onclick="keluar()" class="w-full text-left py-2 text-red-400 hover:text-red-300">
-                <i class="fa fa-sign-out mr-2"></i>Keluar Akun
-            </button>
-        </div>
-    </div>
-    <div id="latar" onclick="tutupMenu()" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
-
-    <!-- HEADER DENGAN TOMBOL MENU -->
     <header class="bg-black/40 backdrop-blur-md py-4 px-4 sticky top-0 z-30">
         <div class="max-w-lg mx-auto flex justify-between items-center">
-            <button onclick="bukaMenu()" class="text-2xl"><i class="fa fa-bars"></i></button>
+            <a href="index.html" class="text-xl"><i class="fa fa-arrow-left"></i></a>
             <h1 class="text-xl font-bold">Syarat & Ketentuan</h1>
             <div></div>
         </div>
     </header>
 
-    <main class="max-w-lg mx-auto px-4 py-8">
-        <div class="bg-white/10 rounded-2xl p-6 border border-white/10 space-y-4 text-gray-300">
-            <h3 class="text-lg font-bold text-white">📌 Syarat Penggunaan</h3>
-            <p>1. Pastikan data ID Game yang kamu masukkan sudah benar dan lengkap.</p>
-            <p>2. Harga yang tertera berlaku saat ini dan dapat berubah sewaktu-waktu tanpa pemberitahuan terlebih dahulu.</p>
-            <p>3. Pesanan akan diproses setelah pembayaran diterima dan terkonfirmasi.</p>
-            <p>4. Waktu pemrosesan biasanya 1-15 menit, maksimal dalam waktu 1x24 jam.</p>
-            <p>5. Dana tidak dapat dikembalikan jika kesalahan berasal dari data yang dimasukkan oleh pembeli.</p>
-            <p>6. Layanan ini hanya boleh digunakan untuk keperluan yang sah dan sesuai hukum yang berlaku.</p>
-
-            <hr class="border-white/10">
-
-            <h3 class="text-lg font-bold text-white">🛡️ Kebijakan Privasi</h3>
-            <p>Kami sangat menjaga kerahasiaan data akun dan semua riwayat transaksi kamu. Data pribadi tidak akan kami sebarkan atau jual kepada pihak lain tanpa izin.</p>
+    <main class="max-w-lg mx-auto px-4 py-6 space-y-3 text-sm text-gray-300">
+        <div class="bg-white/10 rounded-xl p-5 border border-white/10">
+            <p class="mb-2">✅ Dengan melakukan transaksi di Xdnry777 Store, Anda dianggap menyetujui semua syarat berikut:</p>
+            <ul class="list-disc pl-5 space-y-1">
+                <li>Pastikan ID Game yang dimasukkan sudah BENAR. Kesalahan ID bukan tanggung jawab kami.</li>
+                <li>Harga sewaktu-waktu bisa berubah tanpa pemberitahuan sebelumnya.</li>
+                <li>Transaksi dianggap selesai setelah dana diterima dan item masuk ke akun.</li>
+                <li>Tidak ada pengembalian dana jika item sudah masuk ke akun yang benar.</li>
+            </ul>
         </div>
-
-        <div class="text-center mt-6">
-            <a href="index.html" class="inline-block bg-ungu-utama hover:bg-ungu-terang px-6 py-3 rounded-xl font-bold">Kembali ke Beranda</a>
-        </div>
+        <p class="text-center text-xs text-gray-500">Terakhir diperbarui: Juli 2026</p>
     </main>
-
-    <script>
-        // FUNGSI MENU
-        function bukaMenu(){
-            document.getElementById('sidebar').classList.add('buka');
-            document.getElementById('latar').classList.remove('hidden');
-        }
-        function tutupMenu(){
-            document.getElementById('sidebar').classList.remove('buka');
-            document.getElementById('latar').classList.add('hidden');
-        }
-        function keluar(){
-            if(confirm('Yakin ingin keluar akun?')){
-                localStorage.clear();
-                window.location.href='login.html';
-            }
-        }
-    </script>
 </body>
 </html>
