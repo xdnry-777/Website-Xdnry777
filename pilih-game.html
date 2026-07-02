@@ -7,261 +7,54 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        ungu: { utama:'#6B21A8', terang:'#A855F7' }
-                    }
-                }
-            }
-        }
+        tailwind.config = {theme:{extend:{colors:{ungu:{utama:'#6B21A8',terang:'#A855F7'}}}}}
     </script>
     <style>
         body{background:linear-gradient(135deg,#050505 0%,#1A102E 40%,#4C1D95 100%);min-height:100vh;}
-        .game-card:hover{transform:translateY(-5px);box-shadow:0 12px 30px rgba(168,85,247,0.35);}
-        .game-card{transition:all 0.3s ease;}
-        .sidebar{transform:translateX(-100%);transition:0.3s ease;}
-        .sidebar.buka{transform:translateX(0);}
-        button{cursor:pointer;} /* Pastikan kursor jadi tangan */
+        .kartu-game:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(168,85,247,0.3);}
+        .kartu-game{transition:all 0.3s ease;cursor:pointer;}
     </style>
 </head>
 <body class="text-white font-sans">
-    <script>
-        if(!localStorage.getItem('sudahLogin')){
-            alert('⚠️ Silakan Login Dulu!');
-            window.location.href='login.html';
-        }
-    </script>
-
-    <!-- SIDEBAR LENGKAP -->
-    <div id="sidebar" class="sidebar fixed top-0 left-0 h-full w-64 bg-black/95 z-50 p-5">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-xl font-bold text-ungu-terang">Menu</h2>
-            <button onclick="tutupMenu()" class="text-2xl">&times;</button>
-        </div>
-        <div class="space-y-4 text-lg">
-            <a href="index.html" class="block py-2 hover:text-ungu-terang"><i class="fa fa-home mr-2"></i>Beranda</a>
-            <a href="pilih-game.html" class="block py-2 hover:text-ungu-terang"><i class="fa fa-gamepad mr-2"></i>Pilih Game</a>
-            <a href="riwayat.html" class="block py-2 hover:text-ungu-terang"><i class="fa fa-history mr-2"></i>Riwayat Pesanan</a>
-            <a href="bantuan.html" class="block py-2 hover:text-ungu-terang"><i class="fa fa-question-circle mr-2"></i>Pusat Bantuan</a>
-            <a href="syarat.html" class="block py-2 hover:text-ungu-terang"><i class="fa fa-file-text mr-2"></i>Syarat & Ketentuan</a>
-            <hr class="border-white/10">
-            <button onclick="keluar()" class="w-full text-left py-2 text-red-400 hover:text-red-300">
-                <i class="fa fa-sign-out mr-2"></i>Keluar Akun
-            </button>
-        </div>
-    </div>
-    <div id="latar" onclick="tutupMenu()" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
+    <script>if(!localStorage.getItem('sudahLogin')){alert('⚠️ Silakan Login Dulu!');window.location.href='login.html';}</script>
 
     <header class="bg-black/40 backdrop-blur-md py-4 px-4 sticky top-0 z-30">
-        <div class="max-w-3xl mx-auto flex justify-between items-center">
-            <button onclick="bukaMenu()" class="text-2xl z-10 relative"><i class="fa fa-bars"></i></button>
-            <div class="text-xl font-bold text-ungu-terang">⚡ Xdnry777</div>
-            <div class="flex items-center gap-2">
-                <span class="text-sm" id="nama"></span>
-                <button onclick="keluar()" class="bg-red-600 px-3 py-1 rounded-full text-sm">Keluar</button>
-            </div>
+        <div class="max-w-lg mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-xl"><i class="fa fa-arrow-left"></i></a>
+            <h1 class="text-xl font-bold">Pilih Game</h1>
+            <div></div>
         </div>
     </header>
 
-    <main class="max-w-3xl mx-auto px-4 py-8">
-        <div class="text-center mb-8">
-            <h1 class="text-3xl font-bold">Pilih Game</h1>
-            <p class="text-gray-400">6 Game Populer - 5 Pilihan Tiap Game</p>
-        </div>
-        <div class="space-y-8">
-
-            <!-- 1. MOBILE LEGENDS -->
-            <div class="game-card bg-white/10 rounded-2xl p-6 border border-white/10">
-                <div class="flex items-center gap-4 mb-5">
-                    <img src="https://i.imgur.com/6Ov4QKd.png" class="w-16 h-16 rounded-xl">
-                    <div>
-                        <h3 class="text-xl font-bold">Mobile Legends</h3>
-                        <p class="text-gray-400">Diamond</p>
-                    </div>
-                </div>
-                <div class="space-y-3">
-                    <div class="flex justify-between items-center"><span>56 Diamond</span><span class="text-green-400 font-bold">Rp 16.000</span></div>
-                    <button onclick="lanjutBayar('Mobile Legends','56 Diamond',16000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli</button>
-
-                    <div class="flex justify-between items-center"><span>112 Diamond</span><span class="text-green-400 font-bold">Rp 31.000</span></div>
-                    <button onclick="lanjutBayar('Mobile Legends','112 Diamond',31000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli</button>
-
-                    <div class="flex justify-between items-center"><span>256 Diamond</span><span class="text-green-400 font-bold">Rp 68.000</span></div>
-                    <button onclick="lanjutBayar('Mobile Legends','256 Diamond',68000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli</button>
-
-                    <div class="flex justify-between items-center"><span>512 Diamond</span><span class="text-green-400 font-bold">Rp 135.000</span></div>
-                    <button onclick="lanjutBayar('Mobile Legends','512 Diamond',135000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli</button>
-
-                    <div class="flex justify-between items-center"><span>1024 Diamond</span><span class="text-green-400 font-bold">Rp 265.000</span></div>
-                    <button onclick="lanjutBayar('Mobile Legends','1024 Diamond',265000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-3 rounded-lg font-bold">Beli Sekarang</button>
-                </div>
+    <main class="max-w-lg mx-auto px-4 py-6">
+        <div class="grid grid-cols-2 gap-4">
+            <div class="kartu-game bg-white/10 rounded-xl p-4 text-center border border-white/10" onclick="pilihGame('Mobile Legends')">
+                <div class="text-4xl mb-2">🦅</div>
+                <h3 class="font-bold">Mobile Legends</h3>
+                <p class="text-xs text-gray-400 mt-1">Diamond</p>
             </div>
-
-            <!-- 2. FREE FIRE -->
-            <div class="game-card bg-white/10 rounded-2xl p-6 border border-white/10">
-                <div class="flex items-center gap-4 mb-5">
-                    <img src="https://i.imgur.com/7kDtzSR.png" class="w-16 h-16 rounded-xl">
-                    <div>
-                        <h3 class="text-xl font-bold">Free Fire</h3>
-                        <p class="text-gray-400">Diamond</p>
-                    </div>
-                </div>
-                <div class="space-y-3">
-                    <div class="flex justify-between items-center"><span>70 Diamond</span><span class="text-green-400 font-bold">Rp 12.500</span></div>
-                    <button onclick="lanjutBayar('Free Fire','70 Diamond',12500)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli</button>
-
-                    <div class="flex justify-between items-center"><span>140 Diamond</span><span class="text-green-400 font-bold">Rp 24.000</span></div>
-                    <button onclick="lanjutBayar('Free Fire','140 Diamond',24000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli</button>
-
-                    <div class="flex justify-between items-center"><span>355 Diamond</span><span class="text-green-400 font-bold">Rp 59.000</span></div>
-                    <button onclick="lanjutBayar('Free Fire','355 Diamond',59000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli</button>
-
-                    <div class="flex justify-between items-center"><span>720 Diamond</span><span class="text-green-400 font-bold">Rp 118.000</span></div>
-                    <button onclick="lanjutBayar('Free Fire','720 Diamond',118000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli</button>
-
-                    <div class="flex justify-between items-center"><span>1440 Diamond</span><span class="text-green-400 font-bold">Rp 230.000</span></div>
-                    <button onclick="lanjutBayar('Free Fire','1440 Diamond',230000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-3 rounded-lg font-bold">Beli Sekarang</button>
-                </div>
+            <div class="kartu-game bg-white/10 rounded-xl p-4 text-center border border-white/10" onclick="pilihGame('Free Fire')">
+                <div class="text-4xl mb-2">🔥</div>
+                <h3 class="font-bold">Free Fire</h3>
+                <p class="text-xs text-gray-400 mt-1">Diamond</p>
             </div>
-
-            <!-- 3. PUBG MOBILE -->
-            <div class="game-card bg-white/10 rounded-2xl p-6 border border-white/10">
-                <div class="flex items-center gap-4 mb-5">
-                    <img src="https://i.imgur.com/5b2P2tA.png" class="w-16 h-16 rounded-xl">
-                    <div>
-                        <h3 class="text-xl font-bold">PUBG Mobile</h3>
-                        <p class="text-gray-400">UC</p>
-                    </div>
-                </div>
-                <div class="space-y-3">
-                    <div class="flex justify-between items-center"><span>60 UC</span><span class="text-green-400 font-bold">Rp 18.000</span></div>
-                    <button onclick="lanjutBayar('PUBG Mobile','60 UC',18000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli</button>
-
-                    <div class="flex justify-between items-center"><span>180 UC</span><span class="text-green-400 font-bold">Rp 52.000</span></div>
-                    <button onclick="lanjutBayar('PUBG Mobile','180 UC',52000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli</button>
-
-                    <div class="flex justify-between items-center"><span>300 UC</span><span class="text-green-400 font-bold">Rp 85.000</span></div>
-                    <button onclick="lanjutBayar('PUBG Mobile','300 UC',85000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli</button>
-
-                    <div class="flex justify-between items-center"><span>600 UC</span><span class="text-green-400 font-bold">Rp 165.000</span></div>
-                    <button onclick="lanjutBayar('PUBG Mobile','600 UC',165000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli</button>
-
-                    <div class="flex justify-between items-center"><span>1200 UC</span><span class="text-green-400 font-bold">Rp 320.000</span></div>
-                    <button onclick="lanjutBayar('PUBG Mobile','1200 UC',320000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-3 rounded-lg font-bold">Beli Sekarang</button>
-                </div>
+            <div class="kartu-game bg-white/10 rounded-xl p-4 text-center border border-white/10" onclick="pilihGame('PUBG Mobile')">
+                <div class="text-4xl mb-2">🔫</div>
+                <h3 class="font-bold">PUBG Mobile</h3>
+                <p class="text-xs text-gray-400 mt-1">UC</p>
             </div>
-
-            <!-- 4. GENSHIN IMPACT -->
-            <div class="game-card bg-white/10 rounded-2xl p-6 border border-white/10">
-                <div class="flex items-center gap-4 mb-5">
-                    <img src="https://i.imgur.com/9wGfXzI.png" class="w-16 h-16 rounded-xl">
-                    <div>
-                        <h3 class="text-xl font-bold">Genshin Impact</h3>
-                        <p class="text-gray-400">Kristal</p>
-                    </div>
-                </div>
-                <div class="space-y-3">
-                    <div class="flex justify-between items-center"><span>60 Kristal</span><span class="text-green-400 font-bold">Rp 16.000</span></div>
-                    <button onclick="lanjutBayar('Genshin Impact','60 Kristal',16000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli</button>
-
-                    <div class="flex justify-between items-center"><span>330 Kristal</span><span class="text-green-400 font-bold">Rp 79.000</span></div>
-                    <button onclick="lanjutBayar('Genshin Impact','330 Kristal',79000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli</button>
-
-                    <div class="flex justify-between items-center"><span>1090 Kristal</span><span class="text-green-400 font-bold">Rp 240.000</span></div>
-                    <button onclick="lanjutBayar('Genshin Impact','1090 Kristal',240000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli</button>
-
-                    <div class="flex justify-between items-center"><span>3280 Kristal</span><span class="text-green-400 font-bold">Rp 720.000</span></div>
-                    <button onclick="lanjutBayar('Genshin Impact','3280 Kristal',720000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli</button>
-
-                    <div class="flex justify-between items-center"><span>6480 Kristal</span><span class="text-green-400 font-bold">Rp 1.400.000</span></div>
-                    <button onclick="lanjutBayar('Genshin Impact','6480 Kristal',1400000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-3 rounded-lg font-bold">Beli Sekarang</button>
-                </div>
+            <div class="kartu-game bg-white/10 rounded-xl p-4 text-center border border-white/10" onclick="pilihGame('Genshin Impact')">
+                <div class="text-4xl mb-2">⚡</div>
+                <h3 class="font-bold">Genshin Impact</h3>
+                <p class="text-xs text-gray-400 mt-1">Genesis Crystal</p>
             </div>
-
-            <!-- 5. ROBLOX -->
-            <div class="game-card bg-white/10 rounded-2xl p-6 border border-white/10">
-                <div class="flex items-center gap-4 mb-5">
-                    <img src="https://i.imgur.com/4Ae7QZL.png" class="w-16 h-16 rounded-xl">
-                    <div>
-                        <h3 class="text-xl font-bold">Roblox</h3>
-                        <p class="text-gray-400">Robux</p>
-                    </div>
-                </div>
-                <div class="space-y-3">
-                    <div class="flex justify-between items-center"><span>80 Robux</span><span class="text-green-400 font-bold">Rp 22.000</span></div>
-                    <button onclick="lanjutBayar('Roblox','80 Robux',22000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli</button>
-
-                    <div class="flex justify-between items-center"><span>400 Robux</span><span class="text-green-400 font-bold">Rp 95.000</span></div>
-                    <button onclick="lanjutBayar('Roblox','400 Robux',95000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli</button>
-
-                    <div class="flex justify-between items-center"><span>800 Robux</span><span class="text-green-400 font-bold">Rp 180.000</span></div>
-                    <button onclick="lanjutBayar('Roblox','800 Robux',180000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli</button>
-
-                    <div class="flex justify-between items-center"><span>1700 Robux</span><span class="text-green-400 font-bold">Rp 360.000</span></div>
-                    <button onclick="lanjutBayar('Roblox','1700 Robux',360000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli</button>
-
-                    <div class="flex justify-between items-center"><span>4500 Robux</span><span class="text-green-400 font-bold">Rp 880.000</span></div>
-                    <button onclick="lanjutBayar('Roblox','4500 Robux',880000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-3 rounded-lg font-bold">Beli Sekarang</button>
-                </div>
-            </div>
-
-            <!-- 6. HIGGS DOMINO -->
-            <div class="game-card bg-white/10 rounded-2xl p-6 border border-white/10">
-                <div class="flex items-center gap-4 mb-5">
-                    <img src="https://i.imgur.com/xpRcVqY.png" class="w-16 h-16 rounded-xl">
-                    <div>
-                        <h3 class="text-xl font-bold">Higgs Domino</h3>
-                        <p class="text-gray-400">Koin Emas</p>
-                    </div>
-                </div>
-                <div class="space-y-3">
-                    <div class="flex justify-between items-center"><span>100 M</span><span class="text-green-400 font-bold">Rp 12.000</span></div>
-                    <button onclick="lanjutBayar('Higgs Domino','100 M',12000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli</button>
-
-                    <div class="flex justify-between items-center"><span>500 M</span><span class="text-green-400 font-bold">Rp 55.000</span></div>
-                    <button onclick="lanjutBayar('Higgs Domino','500 M',55000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli</button>
-
-                    <div class="flex justify-between items-center"><span>1 B</span><span class="text-green-400 font-bold">Rp 105.000</span></div>
-                    <button onclick="lanjutBayar('Higgs Domino','1 B',105000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli</button>
-
-                    <div class="flex justify-between items-center"><span>5 B</span><span class="text-green-400 font-bold">Rp 500.000</span></div>
-                    <button onclick="lanjutBayar('Higgs Domino','5 B',500000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-2 rounded-lg">Beli</button>
-
-                    <div class="flex justify-between items-center"><span>10 B</span><span class="text-green-400 font-bold">Rp 950.000</span></div>
-                    <button onclick="lanjutBayar('Higgs Domino','10 B',950000)" class="w-full bg-ungu-utama hover:bg-ungu-terang py-3 rounded-lg font-bold">Beli Sekarang</button>
-                </div>
-            </div>
-
         </div>
     </main>
 
     <script>
-        document.getElementById('nama').textContent = localStorage.getItem('namaPengguna') || 'Pengguna';
-
-        // FUNGSI MENU
-        function bukaMenu(){
-            document.getElementById('sidebar').classList.add('buka');
-            document.getElementById('latar').classList.remove('hidden');
-        }
-        function tutupMenu(){
-            document.getElementById('sidebar').classList.remove('buka');
-            document.getElementById('latar').classList.add('hidden');
-        }
-        function keluar(){
-            if(confirm('Yakin ingin keluar?')){
-                localStorage.clear();
-                window.location.href='login.html';
-            }
-        }
-
-        // ✅ FUNGSI TOMBOL BELI - DIPASTIKAN ADA DI SINI!
-        function lanjutBayar(namaGame, item, harga){
+        function pilihGame(namaGame){
             localStorage.setItem('gameDipilih', namaGame);
-            localStorage.setItem('itemDipilih', item);
-            localStorage.setItem('totalHarga', harga);
-            window.location.href='pembayaran.html';
+            window.location.href='pilih-item.html';
         }
     </script>
 </body>
